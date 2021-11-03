@@ -26,6 +26,15 @@ Utility to revise and updated python requirement files.
 * Free software: MIT license
 * Documentation: https://requirement-auditor.readthedocs.io.
 
+Project Goals
+-------------
+
+* Read requirement file and save it to a database.
+
+* Check if requirements in database are outdated and mark the next version
+
+* Create a new requirement file with updated requirements.
+
 
 Features
 --------
@@ -34,6 +43,9 @@ Features
 
 Credits
 -------
+
+Based some of the code of https://github.com/3mcloud/requirement-walker/blob/master/requirement_walker/walker.py
+
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 

@@ -2,6 +2,8 @@
 import argparse
 import sys
 
+from pkg_resources import Requirement
+
 
 def main():
     """Console script for requirement_auditor."""
@@ -12,6 +14,8 @@ def main():
     print("Arguments: " + str(args._))
     print("Replace this message by putting your code into "
           "requirement_auditor.cli.main")
+    r = Requirement.parse('Django==3.2.8')
+    print(r)
     return 0
 
 
