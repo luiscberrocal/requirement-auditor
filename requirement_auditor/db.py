@@ -6,8 +6,6 @@ from requirement_auditor.settings import DB_FILE
 
 Base = declarative_base()
 
-engine = create_engine(f"sqlite:///{DB_FILE}", echo=True)
-
 
 class Project(Base):
     __tablename__ = "projects"
@@ -30,19 +28,13 @@ class Requirement(Base):
     project = relationship("Project", back_populates="requirements")
 
 
-def main():
+def get_database(db_filename=None):
+    if db_filename is None:
+        db_filename = DB_FILE
+    engine = create_engine(f"sqlite:///{db_filename}", echo=True)
     Base.metadata.create_all(engine)
     LocalSession = sessionmaker(bind=engine)
     db: Session = LocalSession()
-
-    project = Project(name='cool-project')
-    requirement_list = list()
-    requirement_list.append(Requirement(name='Django', specs='==', version='3.2.9'))
-    requirement_list.append(Requirement(name='django-test-tools', specs='==', version='2.0.0'))
-    project.requirements = requirement_list
-    db.add(project)
-    db.commit()
+    return db
 
 
-if __name__ == '__main__':
-    main()
