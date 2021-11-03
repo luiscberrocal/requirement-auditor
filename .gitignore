@@ -104,3 +104,4 @@ ENV/
 # IDE settings
 .vscode/
 .idea/
+/requirement_auditor/requirements_auditor.db

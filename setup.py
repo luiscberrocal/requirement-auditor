@@ -32,6 +32,8 @@ setup(
     entry_points={
         'console_scripts': [
             'requirement_auditor=requirement_auditor.cli:main',
+            'db=requirement_auditor.db:main',
+
         ],
     },
     install_requires=requirements,
