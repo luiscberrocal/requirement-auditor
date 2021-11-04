@@ -1,11 +1,22 @@
 import configparser
 import os
+import shutil
 from pathlib import Path
 from unittest import mock
 
 import pytest
 
 from requirement_auditor.settings import write_configuration, get_user_configuration_file, create_default_config
+
+
+@pytest.fixture
+def configuration_folder():
+    config_folder = Path(__file__).parent / '.requirement_auditor'
+    if not os.path.exists(config_folder):
+        os.mkdir(config_folder)
+    yield config_folder
+    if os.path.exists(config_folder):
+        shutil.rmtree(config_folder)
 
 
 @pytest.fixture
@@ -35,10 +46,8 @@ def test_get_user_configuration_file(mock_home):
     assert filename == Path(__file__).parent / '.requirement_auditor/config.cfg'
 
 
-@mock.patch('requirement_auditor.settings.Path.home')
-def test_create_default_config(mock_home):
-    mock_home_folder = Path(__file__).parent
-    mock_home.return_value = mock_home_folder
-    config_data = create_default_config(mock_home)
-    assert config_data['DEFAULT']['db_folder'] == mock_home_folder / 'databases'
-    assert os.path.exists(mock_home_folder / 'databases')
+def test_create_default_config(configuration_folder):
+    folder = Path(__file__).parent / '.requirement_auditor' / 'databases'
+    config_data = create_default_config(configuration_folder)
+    assert config_data['DEFAULT']['db_folder'] == folder
+    assert os.path.exists(folder)
