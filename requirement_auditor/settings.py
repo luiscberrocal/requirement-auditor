@@ -1,6 +1,7 @@
 import configparser
 import os
 from pathlib import Path
+from typing import Tuple, Dict
 
 DB_FILE = Path(__file__).parent / 'requirements_auditor.db'
 
@@ -14,18 +15,27 @@ def write_configuration(config_file, **kwargs):
     return config
 
 
-def get_or_create_configuration(config_file):
+def create_default_config(configuration_folder: Path):
+    config_data = dict()
+    db_folder = configuration_folder / 'databases'
+    config_data['DEFAULT'] = {'db_folder': db_folder,
+                              'db_filename': 'requirement_auditor.db'}
+    if not os.path.exists(db_folder):
+        os.mkdir(db_folder)
+    return config_data
+
+
+def get_or_create_configuration(config_file: str) -> configparser.ConfigParser:
     config = configparser.ConfigParser()
     config.read(config_file)
     return config
 
 
-def get_user_configuration_file():
+def get_user_configuration_file() -> Tuple['Path', bool]:
     home = Path.home()
-    configuration_folder = home / '.gitlab_ci_tools_2'
+    configuration_folder = home / '.requirement_auditor'
     if not os.path.exists(configuration_folder):
         os.mkdir(configuration_folder)
-        print(f'Created {configuration_folder}')
     config_file = configuration_folder / 'config.cfg'
 
     return config_file, os.path.exists(config_file)

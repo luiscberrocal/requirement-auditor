@@ -1,10 +1,11 @@
 import configparser
 import os
 from pathlib import Path
+from unittest import mock
 
 import pytest
 
-from requirement_auditor.settings import write_configuration
+from requirement_auditor.settings import write_configuration, get_user_configuration_file, create_default_config
 
 
 @pytest.fixture
@@ -24,3 +25,20 @@ def test_write_configuration(configuration_file):
     config2 = configparser.ConfigParser()
     config2.read(configuration_file)
     assert config2 == config
+
+
+@mock.patch('requirement_auditor.settings.Path.home')
+def test_get_user_configuration_file(mock_home):
+    mock_home.return_value = Path(__file__).parent
+    filename, exists = get_user_configuration_file()
+    assert not exists
+    assert filename == Path(__file__).parent / '.requirement_auditor/config.cfg'
+
+
+@mock.patch('requirement_auditor.settings.Path.home')
+def test_create_default_config(mock_home):
+    mock_home_folder = Path(__file__).parent
+    mock_home.return_value = mock_home_folder
+    config_data = create_default_config(mock_home)
+    assert config_data['DEFAULT']['db_folder'] == mock_home_folder / 'databases'
+    assert os.path.exists(mock_home_folder / 'databases')
