@@ -1,10 +1,14 @@
+import pathlib
+from typing import Optional, Union
+
 from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, relationship, sessionmaker
+from sqlalchemy.orm.decl_api import DeclarativeMeta
 
 from requirement_auditor.settings import DB_FILE
 
-Base = declarative_base()
+Base: DeclarativeMeta = declarative_base()
 
 
 class Project(Base):
@@ -28,7 +32,7 @@ class Requirement(Base):
     project = relationship("Project", back_populates="requirements")
 
 
-def get_database(db_filename=None):
+def get_database(db_filename: Optional[Union['pathlib.Path', str]] = None) -> Session:
     if db_filename is None:
         db_filename = DB_FILE
     engine = create_engine(f"sqlite:///{db_filename}", echo=True)
@@ -36,5 +40,3 @@ def get_database(db_filename=None):
     LocalSession = sessionmaker(bind=engine)
     db: Session = LocalSession()
     return db
-
-
