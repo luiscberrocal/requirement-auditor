@@ -1,12 +1,12 @@
 import configparser
 import os
 from pathlib import Path
-from typing import Tuple, Dict
+from typing import Tuple, Dict, Any
 
 DB_FILE = Path(__file__).parent / 'requirements_auditor.db'
 
 
-def write_configuration(config_file, **kwargs):
+def write_configuration(config_file: str, **kwargs: Dict[str, Any]) -> configparser.ConfigParser:
     config = configparser.ConfigParser()
     for key, item in kwargs.items():
         config[key] = item
@@ -15,7 +15,7 @@ def write_configuration(config_file, **kwargs):
     return config
 
 
-def create_default_config(configuration_folder: Path):
+def create_default_config(configuration_folder: Path) -> Dict[str, Any]:
     config_data = dict()
     db_folder = configuration_folder / 'databases'
     config_data['DEFAULT'] = {'db_folder': db_folder,

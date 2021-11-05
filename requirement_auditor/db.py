@@ -3,8 +3,8 @@ from typing import Optional, Union
 
 from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Session, relationship, sessionmaker
-from sqlalchemy.orm.decl_api import DeclarativeMeta
+from sqlalchemy.orm import Session, relationship, sessionmaker, RelationshipProperty
+from sqlalchemy.orm.decl_api import DeclarativeMeta  # type: ignore
 
 from requirement_auditor.settings import DB_FILE
 
@@ -16,7 +16,7 @@ class Project(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    requirements = relationship(
+    requirements: RelationshipProperty['Requirement'] = relationship(
         "Requirement", back_populates="project", cascade="all, delete, delete-orphan"
     )
 
@@ -29,7 +29,7 @@ class Requirement(Base):
     version = Column(String, nullable=False)
     project_id = Column(Integer, ForeignKey("projects.id"))
 
-    project = relationship("Project", back_populates="requirements")
+    project: RelationshipProperty[Project] = relationship("Project", back_populates="requirements")
 
 
 def get_database(db_filename: Optional[Union['pathlib.Path', str]] = None) -> Session:
