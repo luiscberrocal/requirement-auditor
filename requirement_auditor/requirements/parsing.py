@@ -9,8 +9,9 @@ class PythonRequirement:
     comment: str = ''
     line_number: int = -1
     regexp_req_with_comment = re.compile(
-        r"(?P<library>[\w_-]+)(?P<specs>[\>\<\=]=)(?P<version>[\w\.-_]+)\s*(?:#(?P<comment>.*))?")
-
+        r"(?P<library>[\w_-]+)(?P<specs>(?:[\>\<\=]=))(?P<version>[\w\.\-_]+)"
+        r",?((?P<specs2>[><]=)(?P<version2>[\w\.\-_]+))?\s*(?:#(?P<comment>.*))?"
+    )
     def __str__(self):
         return f'{self.name} {self.version}'
 
