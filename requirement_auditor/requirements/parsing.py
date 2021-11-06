@@ -2,18 +2,27 @@ import re
 from typing import List, Union
 
 
+class VersionRequirement:
+    operator: str = '=='
+    version_number: str = ''
+
+
 class PythonRequirement:
     name: str = ''
-    specs: List[str] = list()
-    version: str = ''
+    versions: List[VersionRequirement] = list()
     comment: str = ''
     line_number: int = -1
     regexp_req_with_comment = re.compile(
         r"(?P<library>[\w_-]+)(?P<specs>(?:[\>\<\=]=))(?P<version>[\w\.\-_]+)"
         r",?((?P<specs2>[><]=)(?P<version2>[\w\.\-_]+))?\s*(?:#(?P<comment>.*))?"
     )
+
     def __str__(self):
-        return f'{self.name} {self.version}'
+        if len(self.versions) == 1:
+            return f'{self.name}{self.versions[0].operator}{self.versions[0].version_number}'
+        else:
+            return f'{self.name}{self.versions[0].operator}{self.versions[0].version_number},' \
+                   f'{self.versions[1].operator}{self.versions[1].version_number}'
 
     @classmethod
     def parse_line(cls, line: str) -> Union['PythonRequirement', None]:
@@ -22,8 +31,18 @@ class PythonRequirement:
         if match:
             requirement = PythonRequirement()
             requirement.name = match.group('library')
-            requirement.specs.append(match.group('specs'))
-            requirement.version = match.group('version')
+            if match.group('specs'):
+                version = VersionRequirement()
+                version.operator = match.group('specs')
+                version.version_number = match.group('version')
+                requirement.versions.append(version)
+
+            if match.group('specs2'):
+                version = VersionRequirement()
+                version.operator = match.group('specs2')
+                version.version_number = match.group('version2')
+                requirement.versions.append(version)
+
             requirement.comment = match.group('comment')
         return requirement
 
