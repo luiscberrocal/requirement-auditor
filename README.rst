@@ -35,6 +35,9 @@ Project Goals
 
 * Create a new requirement file with updated requirements.
 
+Reference
+
+https://pip.pypa.io/en/stable/user_guide/
 
 Features
 --------

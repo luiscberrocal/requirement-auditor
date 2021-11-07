@@ -22,7 +22,7 @@ def test_iteration():
 def test_python_requirement_regexp():
     reqs = ['Pip==3.4.5']
     for req in reqs:
-        match = PythonRequirement.regexp_req_with_comment.match(req)
+        match = PythonRequirement.REGEXP_REQUIREMENT.match(req)
         print(match)
 
 
