@@ -9,13 +9,15 @@ class VersionRequirement:
 
 class PythonRequirement:
     name: str = ''
-    versions: List[VersionRequirement] = list()
     comment: str = ''
     line_number: int = -1
     regexp_req_with_comment = re.compile(
         r"(?P<library>[\w_-]+)(?P<specs>(?:[\>\<\=]=))(?P<version>[\w\.\-_]+)"
         r",?((?P<specs2>[><]=)(?P<version2>[\w\.\-_]+))?\s*(?:#(?P<comment>.*))?"
     )
+
+    def __init__(self):
+        self.versions: List[VersionRequirement] = list()
 
     def __str__(self):
         if len(self.versions) == 1:

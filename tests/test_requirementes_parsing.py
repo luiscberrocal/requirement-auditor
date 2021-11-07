@@ -7,6 +7,8 @@ def test_iter_requirement_file():
     filename = Path(__file__).parent / 'requirements_dev.txt'
     requirement_file = RequirementFile(filename)
     assert len(requirement_file.requirements) == 13
+    assert requirement_file.requirements[0].name == 'pip'
+
     for req in requirement_file.requirements:
         print(f'>>>{req}')
 
