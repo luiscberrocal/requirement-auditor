@@ -1,0 +1,21 @@
+-r ./base.txt
+
+Werkzeug==2.0.2 # pyup: < 0.15 # https://github.com/pallets/werkzeug
+ipdb==0.13.9  # https://github.com/gotcha/ipdb
+Sphinx==4.2.0  # https://github.com/sphinx-doc/sphinx
+psycopg2==2.8.6 --no-binary psycopg2  # https://github.com/psycopg/psycopg2
+pip==21.3.1
+bump2version==1.0.1
+wheel==0.37.0
+watchdog==2.1.6
+flake8==4.0.1
+tox==3.24.4
+coverage==6.1.1
+Sphinx==4.2.0
+twine==3.4.2
+
+pytest==6.2.5
+black==21.7b0
+mypy==0.910
+Django>=2.0.0,<=3.0.0
+django_test_tools>1.0.0

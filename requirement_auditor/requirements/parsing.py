@@ -1,10 +1,20 @@
 import re
 from typing import List, Union
 
+from requirement_auditor.exceptions import RequirementAuditorException
+
 
 class VersionRequirement:
     operator: str = '=='
-    version_number: str = ''
+    version: str = ''
+
+    def __init__(self, operator, version):
+        self.operator = operator
+        self.version = version
+
+
+class Comment:
+    content: str = ''
 
 
 class PythonRequirement:
@@ -21,10 +31,16 @@ class PythonRequirement:
 
     def __str__(self):
         if len(self.versions) == 1:
-            return f'{self.name}{self.versions[0].operator}{self.versions[0].version_number}'
+            return f'{self.name}{self.versions[0].operator}{self.versions[0].version}'
         else:
-            return f'{self.name}{self.versions[0].operator}{self.versions[0].version_number},' \
-                   f'{self.versions[1].operator}{self.versions[1].version_number}'
+            return f'{self.name}{self.versions[0].operator}{self.versions[0].version},' \
+                   f'{self.versions[1].operator}{self.versions[1].version}'
+
+    def add_version(self, operator, version):
+        if len(self.versions) == 2:
+            msg = 'You can only have up to 2 versions in a requirement.'
+            raise RequirementAuditorException(msg)
+        self.versions.append(VersionRequirement(operator, version))
 
     @classmethod
     def parse_line(cls, line: str) -> Union['PythonRequirement', None]:
@@ -34,17 +50,10 @@ class PythonRequirement:
             requirement = PythonRequirement()
             requirement.name = match.group('library')
             if match.group('specs'):
-                version = VersionRequirement()
-                version.operator = match.group('specs')
-                version.version_number = match.group('version')
-                requirement.versions.append(version)
+                requirement.add_version(match.group('specs'), match.group('version'))
 
             if match.group('specs2'):
-                version = VersionRequirement()
-                version.operator = match.group('specs2')
-                version.version_number = match.group('version2')
-                requirement.versions.append(version)
-
+                requirement.add_version(match.group('specs2'), match.group('version2'))
             requirement.comment = match.group('comment')
         return requirement
 

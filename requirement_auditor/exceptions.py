@@ -1,0 +1,3 @@
+
+class RequirementAuditorException(Exception):
+    pass
