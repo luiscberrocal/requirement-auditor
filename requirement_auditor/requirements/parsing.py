@@ -25,6 +25,7 @@ class PythonRequirement:
         r"(?P<library>[\w_-]+)(?P<specs>(?:[\>\<\=]=))(?P<version>[\w\.\-_]+)"
         r",?((?P<specs2>[><]=)(?P<version2>[\w\.\-_]+))?\s*(?:#(?P<comment>.*))?"
     )
+    REGEXP_FILE = re.compile(r'^-r\s+(?P<file>[\w\-_\.\\\/]+txt)\s*#?(?P<comment>.*)?')
 
     def __init__(self, line: str):
         self.versions: List[VersionRequirement] = list()
