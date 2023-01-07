@@ -105,3 +105,5 @@ ENV/
 .vscode/
 .idea/
 /requirement_auditor/requirements_auditor.db
+
+requirements_db
