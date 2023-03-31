@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "requirement-auditor"
-version = "0.2.2"
+version = "1.0.0"
 description = "Tool to keep track of used requirements."
 authors = ["Luis C. Berrocal <luis.berrocal.1942@gmail.com>"]
 readme = "README.md"
