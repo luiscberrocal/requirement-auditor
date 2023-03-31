@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from typing import Dict, Any, List
 
-from requirement_auditor.reqs_utilities.db import RequirementDatabase
+from requirement_auditor.reqs_utilities.database import RequirementDatabase
 
 
 # def parse_for_permitted_libs(req_file: Path):
