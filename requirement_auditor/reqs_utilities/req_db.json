@@ -21,11 +21,11 @@
     },
     "sentry-sdk": {
         "name": "sentry-sdk",
-        "latest_version": "1.16.0",
-        "approved_version": "1.16.0",
+        "latest_version": "1.18.0",
+        "approved_version": "1.18.0",
         "group": null,
         "environment": "production",
-        "last_updated": "2023-03-01 10:51:42.403228",
+        "last_updated": "2023-03-31 07:16:25.956103",
         "home_page": "https://github.com/getsentry/sentry-python",
         "license": "BSD"
     },
@@ -41,21 +41,21 @@
     },
     "ipdb": {
         "name": "ipdb",
-        "latest_version": "0.13.11",
-        "approved_version": "0.13.11",
+        "latest_version": "0.13.13",
+        "approved_version": "0.13.13",
         "group": null,
         "environment": "local",
-        "last_updated": "2022-12-29 10:05:23.220743",
+        "last_updated": "2023-03-31 07:16:40.849667",
         "home_page": "https://github.com/gotcha/ipdb",
         "license": "BSD"
     },
     "watchfiles": {
         "name": "watchfiles",
-        "latest_version": "0.18.1",
-        "approved_version": "0.18.1",
+        "latest_version": "0.19.0",
+        "approved_version": "0.19.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2022-12-29 10:05:23.548769",
+        "last_updated": "2023-03-31 07:16:47.842684",
         "home_page": "https://github.com/samuelcolvin/watchfiles",
         "license": "MIT"
     },
@@ -71,11 +71,11 @@
     },
     "django-stubs": {
         "name": "django-stubs",
-        "latest_version": "1.15.0",
-        "approved_version": "1.15.0",
+        "latest_version": "1.16.0",
+        "approved_version": "1.16.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-01 10:52:53.044842",
+        "last_updated": "2023-03-31 07:16:55.080737",
         "home_page": "https://github.com/typeddjango/django-stubs",
         "license": "MIT"
     },
@@ -101,11 +101,11 @@
     },
     "djangorestframework-stubs": {
         "name": "djangorestframework-stubs",
-        "latest_version": "1.9.1",
-        "approved_version": "1.9.1",
+        "latest_version": "1.10.0",
+        "approved_version": "1.10.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-01 10:53:09.065797",
+        "last_updated": "2023-03-31 07:17:02.399584",
         "home_page": "https://github.com/typeddjango/djangorestframework-stubs",
         "license": "MIT"
     },
@@ -151,21 +151,21 @@
     },
     "coverage": {
         "name": "coverage",
-        "latest_version": "7.2.1",
-        "approved_version": "7.2.1",
+        "latest_version": "7.2.2",
+        "approved_version": "7.2.2",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-01 10:53:43.821424",
+        "last_updated": "2023-03-31 07:17:27.109704",
         "home_page": "https://github.com/nedbat/coveragepy",
         "license": "Apache-2.0"
     },
     "black": {
         "name": "black",
-        "latest_version": "23.1.0",
-        "approved_version": "23.1.0",
+        "latest_version": "23.3.0",
+        "approved_version": "23.3.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-01 10:54:02.473266",
+        "last_updated": "2023-03-31 07:17:35.499925",
         "home_page": null,
         "license": "MIT"
     },
@@ -191,11 +191,11 @@
     },
     "pre-commit": {
         "name": "pre-commit",
-        "latest_version": "3.1.1",
-        "approved_version": "3.1.1",
+        "latest_version": "3.2.1",
+        "approved_version": "3.2.1",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-01 10:54:13.059993",
+        "last_updated": "2023-03-31 07:17:43.966044",
         "home_page": "https://github.com/pre-commit/pre-commit",
         "license": "MIT"
     },
@@ -261,11 +261,11 @@
     },
     "pytz": {
         "name": "pytz",
-        "latest_version": "2022.7.1",
-        "approved_version": "2022.7.1",
+        "latest_version": "2023.3",
+        "approved_version": "2023.3",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-03-01 10:54:29.331679",
+        "last_updated": "2023-03-31 07:17:59.903483",
         "home_page": "http://pythonhosted.org/pytz",
         "license": "MIT"
     },
@@ -341,11 +341,11 @@
     },
     "django-celery-beat": {
         "name": "django-celery-beat",
-        "latest_version": "2.4.0",
-        "approved_version": "2.4.0",
+        "latest_version": "2.5.0",
+        "approved_version": "2.5.0",
         "group": null,
         "environment": "base",
-        "last_updated": "2022-12-29 10:05:33.219931",
+        "last_updated": "2023-03-31 07:18:44.787631",
         "home_page": "https://github.com/celery/django-celery-beat",
         "license": "BSD"
     },
@@ -381,11 +381,11 @@
     },
     "django-allauth": {
         "name": "django-allauth",
-        "latest_version": "0.52.0",
-        "approved_version": "0.52.0",
+        "latest_version": "0.53.1",
+        "approved_version": "0.53.1",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-03-01 10:55:41.236694",
+        "last_updated": "2023-03-31 07:19:05.427417",
         "home_page": "http://www.intenct.nl/projects/django-allauth/",
         "license": ""
     },
@@ -441,11 +441,11 @@
     },
     "drf-spectacular": {
         "name": "drf-spectacular",
-        "latest_version": "0.26.0",
-        "approved_version": "0.26.0",
+        "latest_version": "0.26.1",
+        "approved_version": "0.26.1",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-03-07 13:19:58.803523",
+        "last_updated": "2023-03-31 07:19:16.301918",
         "home_page": "https://github.com/tfranzel/drf-spectacular",
         "license": "BSD"
     },
@@ -481,11 +481,11 @@
     },
     "django-filter": {
         "name": "django-filter",
-        "latest_version": "22.1",
-        "approved_version": "22.1",
+        "latest_version": "23.1",
+        "approved_version": "23.1",
         "group": null,
         "environment": null,
-        "last_updated": "2023-03-01 10:28:40.925319",
+        "last_updated": "2023-03-31 07:19:30.322863",
         "home_page": "https://github.com/carltongibson/django-filter/tree/main",
         "license": "BSD"
     }
