@@ -9,22 +9,7 @@ import pytest
 from requirement_auditor._legacy.settings import write_configuration, get_user_configuration_file, create_default_config
 
 
-@pytest.fixture
-def configuration_folder():
-    config_folder = Path(__file__).parent / '.requirement_auditor'
-    if not os.path.exists(config_folder):
-        os.mkdir(config_folder)
-    yield config_folder
-    if os.path.exists(config_folder):
-        shutil.rmtree(config_folder)
 
-
-@pytest.fixture
-def configuration_file():
-    out_file = Path(__file__).parent / 'test_config.cfg'
-    yield out_file
-    if os.path.exists(out_file):
-        os.remove(out_file)
 
 
 def test_write_configuration(configuration_file):

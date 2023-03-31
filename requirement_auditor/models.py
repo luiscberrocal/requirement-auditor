@@ -24,7 +24,7 @@ class PythonRequirement(BaseModel):
     approved_version: str
     group: Optional[str]
     environment: Optional[str]
-    last_updated: datetime = Field(default=datetime.now())
+    last_updated: Optional[datetime] = Field(default=datetime.now())
     home_page: Optional[HttpUrl]
     license: Optional[str]
 
@@ -59,5 +59,3 @@ class PythonRequirement(BaseModel):
             ]
         )
         return version_info
-
-

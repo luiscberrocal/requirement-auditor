@@ -37,21 +37,29 @@ class RequirementDatabase(ABC):
         """Delete a requirement by name"""
 
     @abstractmethod
+    def count(self) -> int:
+        """Count of total requirements in Database"""
+
+    @abstractmethod
     def save(self) -> int:
         """Saves all changes to the file"""
 
 
 class JSONRequirementDatabase(RequirementDatabase):
-    def __init__(self, source_file: Path):
-        if not source_file.exists():
+    def __init__(self, source_file: Path, create_source: bool = True):
+        if not source_file.exists() and not create_source:
             message = f'DB file {source_file} not found.'
             raise DatabaseError(message)
+        if not source_file.exists() and create_source:
+            with open(source_file, 'w') as j_file:
+                json.dump({}, j_file)  # type: ignore
         self.source_file = source_file
         self.database: Dict[str, Any] = dict()
         self.dirty: Deque = deque()
+        self._load_db()
 
-    def _load_db(self, source_file: Path):
-        with open(source_file, 'r') as j_file:
+    def _load_db(self):
+        with open(self.source_file, 'r') as j_file:
             data = json.load(j_file)
         for name, req_dict in data.items():
             try:
@@ -62,9 +70,15 @@ class JSONRequirementDatabase(RequirementDatabase):
 
     def create(self, requirement: PythonRequirement) -> PythonRequirement:
         """Create a new requirement in the database"""
+        if self.get(requirement.name) is not None:
+            raise DatabaseError(f'There is already a requirement {requirement.name}. Try updating it.')
+        requirement.last_updated = datetime.now()
+        self.database[requirement.name] = requirement
+        return requirement
 
     def get(self, name: str) -> PythonRequirement | None:
         """Get a requirement by name"""
+        return self.database.get(name)
 
     def filter(self, **kwargs) -> List[PythonRequirement]:
         """Get a requirement by name"""
@@ -74,6 +88,9 @@ class JSONRequirementDatabase(RequirementDatabase):
 
     def delete(self, name: str) -> bool:
         """Delete a requirement by name"""
+
+    def count(self) -> int:
+        return len(self.database.keys())
 
     def save(self) -> int:
         """Saves all changes to the file"""
