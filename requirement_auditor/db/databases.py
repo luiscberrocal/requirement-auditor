@@ -9,7 +9,7 @@ import requests
 from johnnydep.pipper import get_versions
 from pydantic import ValidationError
 
-from requirement_auditor.reqs_utilities.models import RecommendedRequirement
+from requirement_auditor.models import RecommendedRequirement
 
 
 class RequirementDatabase(ABC):

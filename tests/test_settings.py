@@ -6,7 +6,7 @@ from unittest import mock
 
 import pytest
 
-from requirement_auditor.settings import write_configuration, get_user_configuration_file, create_default_config
+from requirement_auditor._legacy.settings import write_configuration, get_user_configuration_file, create_default_config
 
 
 @pytest.fixture
