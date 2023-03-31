@@ -1,5 +1,6 @@
 import json
 import re
+from abc import ABC, abstractmethod
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict
@@ -11,9 +12,30 @@ from pydantic import ValidationError
 from requirement_auditor.reqs_utilities.models import RecommendedRequirement
 
 
+class RequirementDatabase(ABC):
+
+    @abstractmethod
+    def create(self):
+        """Create a new requirement in the database"""
+
+    @abstractmethod
+    def get(self):
+        """Get a requirement by name"""
+
+    @abstractmethod
+    def update(self):
+        """Updates a requirement"""
+
+    @abstractmethod
+    def delete(self):
+        """Delete a requirment by name"""
+
+    @abstractmethod
+    def save(self):
+        """Saves all changes to the file"""
 
 
-class RequirementDatabase:
+class JSONRequirementDatabase:
 
     def __init__(self, source_file: Path):
         self.source_file = source_file
@@ -124,7 +146,7 @@ class RequirementDatabase:
         return parsed_requirements
 
 
-def check_for_new_requirements(db: RequirementDatabase):
+def check_for_new_requirements(db: JSONRequirementDatabase):
     for name, req in db.database.items():
         info = db._download_info(name, req.approved_version)
         versions = get_versions(name)
@@ -144,5 +166,5 @@ def check_for_new_requirements(db: RequirementDatabase):
 
 if __name__ == '__main__':
     db_file = Path(__file__).parent / 'req_db.json'
-    db = RequirementDatabase(db_file)
+    db = JSONRequirementDatabase(db_file)
     check_for_new_requirements(db)
