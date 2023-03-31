@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from typing import Dict, Any, List
 
-from requirement_auditor.db.databases import JSONRequirementDatabase
+from requirement_auditor.db.databases import JSONReqDatabase
 
 
 # def parse_for_permitted_libs(req_file: Path):
@@ -36,7 +36,7 @@ def parse_requirement_file(req_file: Path) -> List[Dict[str, Any]]:
     return parsed_requirements
 
 
-def interactive_parse_requirements(req_file: Path, db: JSONRequirementDatabase):
+def interactive_parse_requirements(req_file: Path, db: JSONReqDatabase):
     requirements = parse_requirement_file(req_file)
     for requirement in requirements:
         if requirement.get('parsed'):
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     db_file = Path(__file__).parent / 'req_db.json'
     if not db_file.exists():
         raise Exception('File not found')
-    db = JSONRequirementDatabase(db_file)
+    db = JSONReqDatabase(db_file)
 
     project = 'adelantos-cupos'
     project = 'ec-d-local-payment-collector'

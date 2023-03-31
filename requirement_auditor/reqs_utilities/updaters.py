@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from requirement_auditor.db.databases import JSONRequirementDatabase
+from requirement_auditor.db.databases import JSONReqDatabase
 from requirement_auditor.reqs_utilities.parsers import parse_requirement_file
 
 logger = logging.getLogger(__name__)
@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class Updater:
 
-    def __init__(self, database: JSONRequirementDatabase):
+    def __init__(self, database: JSONReqDatabase):
         self.database = database
 
     def update_requirements(self, requirement_file: Path):
@@ -35,7 +35,7 @@ class Updater:
 if __name__ == '__main__':
     home = Path().home()
     db_file = Path(__file__).parent.parent / 'data' / 'req_db.json'
-    db = JSONRequirementDatabase(db_file)
+    db = JSONReqDatabase(db_file)
     output_folder = Path(__file__).parent.parent.parent.parent / 'output'
     # project = 'adelantos-cupos'
     # project = 'ec-d-local-payment-collector'

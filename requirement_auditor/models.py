@@ -18,7 +18,7 @@ def convert_version_to_tuples(version: str):
     return version_info
 
 
-class RecommendedRequirement(BaseModel):
+class PythonRequirement(BaseModel):
     name: str
     latest_version: str
     approved_version: str
@@ -59,3 +59,5 @@ class RecommendedRequirement(BaseModel):
             ]
         )
         return version_info
+
+
