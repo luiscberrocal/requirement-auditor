@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from requirement_auditor.reqs_utilities.database import RequirementDatabase
+from requirement_auditor.db.database import RequirementDatabase
 from requirement_auditor.reqs_utilities.parsers import parse_requirement_file
 
 logger = logging.getLogger(__name__)
