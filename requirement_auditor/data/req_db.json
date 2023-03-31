@@ -6,7 +6,7 @@
         "group": null,
         "environment": "production",
         "last_updated": "2022-12-29 10:05:21.952448",
-        "home_page": "https://gunicorn.org",
+        "home_page": "https://github.com/benoitc/gunicorn",
         "license": "MIT"
     },
     "psycopg2": {
@@ -16,7 +16,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2022-12-29 10:05:22.239939",
-        "home_page": "https://psycopg.org/",
+        "home_page": "https://github.com/psycopg/psycopg2",
         "license": "LGPL with exceptions"
     },
     "sentry-sdk": {
@@ -66,7 +66,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2023-03-07 13:18:26.216520",
-        "home_page": "http://www.mypy-lang.org/",
+        "home_page": "https://github.com/python/mypy",
         "license": "MIT License"
     },
     "django-stubs": {
@@ -86,7 +86,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2023-03-07 13:18:37.492004",
-        "home_page": "https://docs.pytest.org/en/latest/",
+        "home_page": "https://github.com/pytest-dev/pytest",
         "license": "MIT"
     },
     "pytest-sugar": {
@@ -96,7 +96,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2022-12-29 10:05:24.886177",
-        "home_page": "https://pivotfinland.com/pytest-sugar/",
+        "home_page": "https://github.com/Frozenball/pytest-sugar",
         "license": "BSD"
     },
     "djangorestframework-stubs": {
@@ -116,7 +116,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2023-03-01 10:53:21.501931",
-        "home_page": null,
+        "home_page": "https://github.com/sphinx-doc/sphinx",
         "license": ""
     },
     "sphinx-autobuild": {
@@ -166,7 +166,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2023-03-31 07:17:35.499925",
-        "home_page": null,
+        "home_page": " https://github.com/psf/black",
         "license": "MIT"
     },
     "pylint-django": {
@@ -216,7 +216,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2022-12-29 10:05:28.973369",
-        "home_page": null,
+        "home_page": "https://github.com/jazzband/django-debug-toolbar" ,
         "license": "BSD-3-Clause"
     },
     "django-extensions": {
@@ -286,7 +286,7 @@
         "group": null,
         "environment": "base",
         "last_updated": "2023-03-01 10:54:47.565663",
-        "home_page": "https://python-pillow.org",
+        "home_page": "https://github.com/python-pillow/Pillow",
         "license": "HPND"
     },
     "argon2-cffi": {
@@ -426,7 +426,7 @@
         "group": null,
         "environment": "base",
         "last_updated": "2022-12-29 10:05:35.946385",
-        "home_page": "https://www.django-rest-framework.org/",
+        "home_page": "https://github.com/encode/django-rest-framework",
         "license": "BSD"
     },
     "django-cors-headers": {

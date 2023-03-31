@@ -3,12 +3,13 @@ import re
 from abc import ABC, abstractmethod
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 
 import requests
 from johnnydep.pipper import get_versions
 from pydantic import ValidationError
 
+from requirement_auditor.exceptions import DatabaseError
 from requirement_auditor.models import RecommendedRequirement
 
 
@@ -38,9 +39,12 @@ class RequirementDatabase(ABC):
 class JSONRequirementDatabase:
 
     def __init__(self, source_file: Path):
+        if not source_file.exists():
+            message = f'DB file {source_file} not found.'
+            raise DatabaseError(message)
         self.source_file = source_file
         self.regexp = re.compile(r'(?P<lib_name>[\w_\-]+)==(?P<version>[\w\.\-]+)\s*#?(?P<comment>.*)')
-        self.database = dict()
+        self.database: Dict[str, Any] = dict()
         self.load_db(self.source_file)
 
     def load_db(self, source_file: Path):
@@ -51,7 +55,7 @@ class JSONRequirementDatabase:
                 self.database[name] = RecommendedRequirement(**req_dict)
             except ValidationError as e:
                 error_message = f'Invalid {name} library content. {e}'
-                raise Exception(error_message)
+                raise DatabaseError(error_message)
 
     def get(self, name: str) -> RecommendedRequirement:
         return self.database.get(name)
@@ -165,6 +169,6 @@ def check_for_new_requirements(db: JSONRequirementDatabase):
 
 
 if __name__ == '__main__':
-    db_file = Path(__file__).parent / 'req_db.json'
+    db_file = Path(__file__).parent.parent / 'data' / 'req_db.json'
     db = JSONRequirementDatabase(db_file)
     check_for_new_requirements(db)

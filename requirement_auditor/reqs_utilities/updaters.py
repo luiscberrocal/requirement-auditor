@@ -34,7 +34,7 @@ class Updater:
 
 if __name__ == '__main__':
     home = Path().home()
-    db_file = Path(__file__).parent / 'req_db.json'
+    db_file = Path(__file__).parent.parent / 'data' / 'req_db.json'
     db = JSONRequirementDatabase(db_file)
     output_folder = Path(__file__).parent.parent.parent.parent / 'output'
     # project = 'adelantos-cupos'
@@ -43,10 +43,11 @@ if __name__ == '__main__':
     # project = 'credibanco_integration'
     # project = 'movil-reseller-payments'
     # project = 'sms-integration'
-    #project = 'payment_router'
+    # project = 'payment_router'
     # project = 'multipagos-integrator'
     # project ='pj_django_payments/tests/example'
-    project = 'payment-collector'
+    # project = 'payment-collector'
+    project = 'bcp-integration'
     command = 'CHANGE'
     if command == 'CHANGE':
         updater = Updater(db)
