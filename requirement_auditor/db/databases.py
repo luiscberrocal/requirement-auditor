@@ -85,6 +85,20 @@ class JSONRequirementDatabase(RequirementDatabase):
 
     def update(self, requirement: PythonRequirement, fields: List[str] | None = None) -> PythonRequirement:
         """Updates a requirement"""
+        requirement_to_update = self.get(requirement.name)
+        if requirement_to_update is None:
+            raise DatabaseError(f'Requirement {requirement.name} does not exist.')
+        requirement.last_updated = datetime.now()
+        if fields is None:
+            self.database[requirement.name] = requirement
+        else:
+            for field in fields:
+                if hasattr(requirement_to_update, field):
+                    value = getattr(requirement_to_update, field)
+                    setattr(requirement_to_update, field, value)
+                else:
+                    raise DatabaseError(f'Field {field} not found.')
+        return requirement_to_update
 
     def delete(self, name: str) -> bool:
         """Delete a requirement by name"""
@@ -103,8 +117,6 @@ class JSONRequirementDatabase(RequirementDatabase):
         except Exception as e:
             error_message = f'Unexpected error. Type: {e.__class__.__name__} error: {e}'
             raise DatabaseError(error_message)
-
-
 
 
 class JSONReqDatabase:

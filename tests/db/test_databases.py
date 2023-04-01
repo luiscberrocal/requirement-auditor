@@ -41,3 +41,37 @@ class TestJSONRequirementDatabase:
         assert db_dict['my-package']['home_page'] == requirement.home_page
         assert db_dict['my-package']['license'] == requirement.license
 
+    def test_update(self, json_db_file):
+        db = JSONRequirementDatabase(json_db_file)
+        requirement = PythonRequirement(name='my-package', latest_version='2.0.3',
+                                        approved_version='2.0.0')
+        db.create(requirement)
+        db.save()
+        requirement_to_update = PythonRequirement(name='my-package', latest_version='3.0.3',
+                                                  approved_version='2.0.0', home_page='https://miuc.com/mmm')
+        db.update(requirement_to_update)
+
+        updated_requirement = db.get(requirement.name)
+
+        assert requirement_to_update.approved_version == updated_requirement.approved_version
+        assert requirement_to_update.approved_version_info == updated_requirement.approved_version_info
+        assert requirement_to_update.construct == updated_requirement.construct
+        assert requirement_to_update.copy == updated_requirement.copy
+        assert requirement_to_update.dict == updated_requirement.dict
+        assert requirement_to_update.environment == updated_requirement.environment
+        assert requirement_to_update.group == updated_requirement.group
+        assert requirement_to_update.home_page == updated_requirement.home_page
+        assert requirement_to_update.json == updated_requirement.json
+        assert requirement_to_update.last_updated == updated_requirement.last_updated
+        assert requirement_to_update.latest_version == updated_requirement.latest_version
+        assert requirement_to_update.latest_version_info == updated_requirement.latest_version_info
+        assert requirement_to_update.license == updated_requirement.license
+        assert requirement_to_update.name == updated_requirement.name
+        assert requirement_to_update.parse_file == updated_requirement.parse_file
+        assert requirement_to_update.parse_obj == updated_requirement.parse_obj
+        assert requirement_to_update.parse_raw == updated_requirement.parse_raw
+        assert requirement_to_update.schema == updated_requirement.schema
+        assert requirement_to_update.schema_json == updated_requirement.schema_json
+        assert requirement_to_update.to_req_line == updated_requirement.to_req_line
+        assert requirement_to_update.update_forward_refs == updated_requirement.update_forward_refs
+
