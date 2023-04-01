@@ -41,7 +41,7 @@ class RequirementDatabase(ABC):
         """Count of total requirements in Database"""
 
     @abstractmethod
-    def save(self) -> int:
+    def save(self) -> None:
         """Saves all changes to the file"""
 
 
@@ -92,8 +92,19 @@ class JSONRequirementDatabase(RequirementDatabase):
     def count(self) -> int:
         return len(self.database.keys())
 
-    def save(self) -> int:
+    def save(self) -> None:
         """Saves all changes to the file"""
+        try:
+            tmp = dict()
+            for name, req in self.database.items():
+                tmp[name] = req.dict()
+            with open(self.source_file, 'w') as f:
+                json.dump(tmp, f, indent=4, default=str)
+        except Exception as e:
+            error_message = f'Unexpected error. Type: {e.__class__.__name__} error: {e}'
+            raise DatabaseError(error_message)
+
+
 
 
 class JSONReqDatabase:
