@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from requirement_auditor.db.databases import JSONRequirementDatabase
+from requirement_auditor.db.databases import JSONReqDatabase
 from requirement_auditor.reqs_utilities.parsers import parse_requirement_file
 
 logger = logging.getLogger(__name__)
@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class Updater:
 
-    def __init__(self, database: JSONRequirementDatabase):
+    def __init__(self, database: JSONReqDatabase):
         self.database = database
 
     def update_requirements(self, requirement_file: Path):
@@ -34,8 +34,8 @@ class Updater:
 
 if __name__ == '__main__':
     home = Path().home()
-    db_file = Path(__file__).parent / 'req_db.json'
-    db = JSONRequirementDatabase(db_file)
+    db_file = Path(__file__).parent.parent / 'data' / 'req_db.json'
+    db = JSONReqDatabase(db_file)
     output_folder = Path(__file__).parent.parent.parent.parent / 'output'
     # project = 'adelantos-cupos'
     # project = 'ec-d-local-payment-collector'
@@ -43,10 +43,11 @@ if __name__ == '__main__':
     # project = 'credibanco_integration'
     # project = 'movil-reseller-payments'
     # project = 'sms-integration'
-    #project = 'payment_router'
+    # project = 'payment_router'
     # project = 'multipagos-integrator'
     # project ='pj_django_payments/tests/example'
-    project = 'payment-collector'
+    # project = 'payment-collector'
+    project = 'bcp-integration'
     command = 'CHANGE'
     if command == 'CHANGE':
         updater = Updater(db)

@@ -1,46 +1,133 @@
 import json
 import re
 from abc import ABC, abstractmethod
+from collections import deque
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional, Dict, Any, List, Deque
 
 import requests
 from johnnydep.pipper import get_versions
 from pydantic import ValidationError
 
-from requirement_auditor.models import RecommendedRequirement
+from requirement_auditor.exceptions import DatabaseError
+from requirement_auditor.models import PythonRequirement
 
 
 class RequirementDatabase(ABC):
 
     @abstractmethod
-    def create(self):
+    def create(self, requirement: PythonRequirement) -> PythonRequirement:
         """Create a new requirement in the database"""
 
     @abstractmethod
-    def get(self):
+    def get(self, name: str) -> PythonRequirement | None:
         """Get a requirement by name"""
 
     @abstractmethod
-    def update(self):
+    def filter(self, **kwargs) -> List[PythonRequirement]:
+        """Get a requirement by name"""
+
+    @abstractmethod
+    def update(self, requirement: PythonRequirement, fields: List[str] | None = None) -> PythonRequirement:
         """Updates a requirement"""
 
     @abstractmethod
-    def delete(self):
-        """Delete a requirment by name"""
+    def delete(self, name: str) -> bool:
+        """Delete a requirement by name"""
 
     @abstractmethod
-    def save(self):
+    def count(self) -> int:
+        """Count of total requirements in Database"""
+
+    @abstractmethod
+    def save(self) -> None:
         """Saves all changes to the file"""
 
 
-class JSONRequirementDatabase:
+class JSONRequirementDatabase(RequirementDatabase):
+    def __init__(self, source_file: Path, create_source: bool = True):
+        if not source_file.exists() and not create_source:
+            message = f'DB file {source_file} not found.'
+            raise DatabaseError(message)
+        if not source_file.exists() and create_source:
+            with open(source_file, 'w') as j_file:
+                json.dump({}, j_file)  # type: ignore
+        self.source_file = source_file
+        self.database: Dict[str, Any] = dict()
+        self.dirty: Deque = deque()
+        self._load_db()
+
+    def _load_db(self):
+        with open(self.source_file, 'r') as j_file:
+            data = json.load(j_file)
+        for name, req_dict in data.items():
+            try:
+                self.database[name] = PythonRequirement(**req_dict)
+            except ValidationError as e:
+                error_message = f'Invalid {name} library content. {e}'
+                raise DatabaseError(error_message)
+
+    def create(self, requirement: PythonRequirement) -> PythonRequirement:
+        """Create a new requirement in the database"""
+        if self.get(requirement.name) is not None:
+            raise DatabaseError(f'There is already a requirement {requirement.name}. Try updating it.')
+        requirement.last_updated = datetime.now()
+        self.database[requirement.name] = requirement
+        return requirement
+
+    def get(self, name: str) -> PythonRequirement | None:
+        """Get a requirement by name"""
+        return self.database.get(name)
+
+    def filter(self, **kwargs) -> List[PythonRequirement]:
+        """Get a requirement by name"""
+
+    def update(self, requirement: PythonRequirement, fields: List[str] | None = None) -> PythonRequirement:
+        """Updates a requirement"""
+        requirement_to_update = self.get(requirement.name)
+        if requirement_to_update is None:
+            raise DatabaseError(f'Requirement {requirement.name} does not exist.')
+        requirement.last_updated = datetime.now()
+        if fields is None:
+            self.database[requirement.name] = requirement
+        else:
+            for field in fields:
+                if hasattr(requirement_to_update, field):
+                    value = getattr(requirement_to_update, field)
+                    setattr(requirement_to_update, field, value)
+                else:
+                    raise DatabaseError(f'Field {field} not found.')
+        return requirement_to_update
+
+    def delete(self, name: str) -> bool:
+        """Delete a requirement by name"""
+
+    def count(self) -> int:
+        return len(self.database.keys())
+
+    def save(self) -> None:
+        """Saves all changes to the file"""
+        try:
+            tmp = dict()
+            for name, req in self.database.items():
+                tmp[name] = req.dict()
+            with open(self.source_file, 'w') as f:
+                json.dump(tmp, f, indent=4, default=str)
+        except Exception as e:
+            error_message = f'Unexpected error. Type: {e.__class__.__name__} error: {e}'
+            raise DatabaseError(error_message)
+
+
+class JSONReqDatabase:
 
     def __init__(self, source_file: Path):
+        if not source_file.exists():
+            message = f'DB file {source_file} not found.'
+            raise DatabaseError(message)
         self.source_file = source_file
         self.regexp = re.compile(r'(?P<lib_name>[\w_\-]+)==(?P<version>[\w\.\-]+)\s*#?(?P<comment>.*)')
-        self.database = dict()
+        self.database: Dict[str, Any] = dict()
         self.load_db(self.source_file)
 
     def load_db(self, source_file: Path):
@@ -48,16 +135,16 @@ class JSONRequirementDatabase:
             data = json.load(j_file)
         for name, req_dict in data.items():
             try:
-                self.database[name] = RecommendedRequirement(**req_dict)
+                self.database[name] = PythonRequirement(**req_dict)
             except ValidationError as e:
                 error_message = f'Invalid {name} library content. {e}'
-                raise Exception(error_message)
+                raise DatabaseError(error_message)
 
-    def get(self, name: str) -> RecommendedRequirement:
+    def get(self, name: str) -> PythonRequirement:
         return self.database.get(name)
 
     def add(self, name: str, environment: Optional[str], version: Optional[str] = None,
-            commit: bool = True) -> RecommendedRequirement:
+            commit: bool = True) -> PythonRequirement:
         if self.get(name) is not None:
             raise Exception(f'Library {name} already exists use update.')
         versions = get_versions(name)
@@ -65,9 +152,9 @@ class JSONRequirementDatabase:
             raise Exception(f'Library {name} not found')
         latest_version = versions[-1]
         approved_version = version if version is not None else latest_version
-        recommended = RecommendedRequirement(name=name, latest_version=latest_version,
-                                             approved_version=approved_version,
-                                             environment=environment)
+        recommended = PythonRequirement(name=name, latest_version=latest_version,
+                                        approved_version=approved_version,
+                                        environment=environment)
         info = self._download_info(name, recommended.approved_version)
         recommended.home_page = info['home_page']
         recommended.license = info['license']
@@ -77,7 +164,7 @@ class JSONRequirementDatabase:
             self.save()
         return recommended
 
-    def update(self, name: str) -> RecommendedRequirement:
+    def update(self, name: str) -> PythonRequirement:
         req = self.get(name)
         if req is None:
             raise Exception(f'Requirement {name} does not exist.')
@@ -127,7 +214,7 @@ class JSONRequirementDatabase:
             global_req.update(reqs)
         return global_req
 
-    def get_from_requirement_file(self, req_file: Path) -> Dict[str, RecommendedRequirement]:
+    def get_from_requirement_file(self, req_file: Path) -> Dict[str, PythonRequirement]:
         with open(req_file, 'r') as r_file:
             lines = r_file.readlines()
         parsed_requirements = dict()
@@ -139,14 +226,14 @@ class JSONRequirementDatabase:
                 if len(versions) == 0:
                     raise Exception(f'Library {lib_name} not found')
                 latest_version = versions[-1]
-                recommended = RecommendedRequirement(name=lib_name, latest_version=latest_version,
-                                                     approved_version=match.group('version'),
-                                                     environment=req_file.stem)
+                recommended = PythonRequirement(name=lib_name, latest_version=latest_version,
+                                                approved_version=match.group('version'),
+                                                environment=req_file.stem)
                 parsed_requirements[lib_name] = recommended
         return parsed_requirements
 
 
-def check_for_new_requirements(db: JSONRequirementDatabase):
+def check_for_new_requirements(db: JSONReqDatabase):
     for name, req in db.database.items():
         info = db._download_info(name, req.approved_version)
         versions = get_versions(name)
@@ -165,6 +252,6 @@ def check_for_new_requirements(db: JSONRequirementDatabase):
 
 
 if __name__ == '__main__':
-    db_file = Path(__file__).parent / 'req_db.json'
-    db = JSONRequirementDatabase(db_file)
+    db_file = Path(__file__).parent.parent / 'data' / 'req_db.json'
+    db = JSONReqDatabase(db_file)
     check_for_new_requirements(db)

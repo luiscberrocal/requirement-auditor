@@ -18,13 +18,13 @@ def convert_version_to_tuples(version: str):
     return version_info
 
 
-class RecommendedRequirement(BaseModel):
+class PythonRequirement(BaseModel):
     name: str
     latest_version: str
     approved_version: str
     group: Optional[str]
     environment: Optional[str]
-    last_updated: datetime = Field(default=datetime.now())
+    last_updated: Optional[datetime] = Field(default=datetime.now())
     home_page: Optional[HttpUrl]
     license: Optional[str]
 

@@ -107,3 +107,4 @@ ENV/
 /requirement_auditor/requirements_auditor.db
 
 requirements_db
+output
