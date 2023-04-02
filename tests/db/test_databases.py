@@ -80,3 +80,11 @@ class TestJSONRequirementDatabase:
         assert requirement_to_update.schema_json == updated_requirement.schema_json
         assert requirement_to_update.to_req_line == updated_requirement.to_req_line
         assert requirement_to_update.update_forward_refs == updated_requirement.update_forward_refs
+
+    def test_delete(self, json_db):
+        assert json_db.count() == 10
+
+        json_db.delete('celery')
+
+        assert json_db.count() == 9
+        assert json_db.get('celery') is None

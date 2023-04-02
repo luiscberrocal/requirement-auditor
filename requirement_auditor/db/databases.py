@@ -107,6 +107,11 @@ class JSONRequirementDatabase(RequirementDatabase):
 
     def delete(self, name: str) -> bool:
         """Delete a requirement by name"""
+        requirement = self.get(name)
+        if requirement is None:
+            raise DatabaseError(f'Requirement {name} not found.')
+        del self.database[name]
+        return True
 
     def count(self) -> int:
         return len(self.database.keys())
