@@ -15,14 +15,17 @@ def is_stable_version(version: str, regexp: Pattern = STABLE_VERSION_REGEX) -> b
 def get_latest_version(name: str, stable_only: bool) -> str:
     versions = get_versions(name)
     if len(versions) == 0:
-        raise LibraryNotFoundError(f'Library {name} not found')
+        raise LibraryNotFoundError(f'Library {name} not found.')
     if stable_only:
         position = -1
         while True:
-            latest_version = versions[position]
-            if is_stable_version(latest_version):
-                return latest_version
-            position -= 1
+            try:
+                latest_version = versions[position]
+                if is_stable_version(latest_version):
+                    return latest_version
+                position -= 1
+            except IndexError:
+                raise LibraryNotFoundError(f'Could not find stable version for {name} library.')
     else:
         latest_version = versions[-1]
     return latest_version
