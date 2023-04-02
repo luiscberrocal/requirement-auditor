@@ -1,6 +1,11 @@
 import json
+from datetime import datetime
+
+import pytest
+from freezegun import freeze_time
 
 from requirement_auditor.db.databases import JSONRequirementDatabase
+from requirement_auditor.exceptions import DatabaseError
 from requirement_auditor.models import PythonRequirement
 
 
@@ -12,15 +17,17 @@ class TestJSONRequirementDatabase:
         db = JSONRequirementDatabase(db_file)
         assert db.count() == 0
 
+    @freeze_time('2023-02-03 16:40:00')
     def test_create_requirement(self, json_db_file):
+        update_date = datetime(2023, 2, 3, 16, 40, 0)
         db = JSONRequirementDatabase(json_db_file)
         requirement = PythonRequirement(name='my-package', latest_version='2.0.3',
                                         approved_version='2.0.0')
         req = db.create(requirement)
 
         assert db.count() == 1
-        assert req.last_updated is not None
-        assert requirement.last_updated is not None
+        assert req.last_updated == update_date
+        assert requirement.last_updated == update_date
 
     def test_save(self, json_db_file):
         db = JSONRequirementDatabase(json_db_file)
@@ -41,7 +48,9 @@ class TestJSONRequirementDatabase:
         assert db_dict['my-package']['home_page'] == requirement.home_page
         assert db_dict['my-package']['license'] == requirement.license
 
+    @freeze_time('2023-02-03 16:40:00')
     def test_update(self, json_db_file):
+        update_date = datetime(2023, 2, 3, 16, 40, 0)
         db = JSONRequirementDatabase(json_db_file)
         requirement = PythonRequirement(name='my-package', latest_version='2.0.3',
                                         approved_version='2.0.0')
@@ -50,19 +59,18 @@ class TestJSONRequirementDatabase:
         requirement_to_update = PythonRequirement(name='my-package', latest_version='3.0.3',
                                                   approved_version='2.0.0', home_page='https://miuc.com/mmm')
         db.update(requirement_to_update)
-
         updated_requirement = db.get(requirement.name)
 
         assert requirement_to_update.approved_version == updated_requirement.approved_version
         assert requirement_to_update.approved_version_info == updated_requirement.approved_version_info
-        assert requirement_to_update.construct == updated_requirement.construct
-        assert requirement_to_update.copy == updated_requirement.copy
         assert requirement_to_update.dict == updated_requirement.dict
         assert requirement_to_update.environment == updated_requirement.environment
         assert requirement_to_update.group == updated_requirement.group
         assert requirement_to_update.home_page == updated_requirement.home_page
         assert requirement_to_update.json == updated_requirement.json
-        assert requirement_to_update.last_updated == updated_requirement.last_updated
+
+        assert requirement_to_update.last_updated == update_date
+
         assert requirement_to_update.latest_version == updated_requirement.latest_version
         assert requirement_to_update.latest_version_info == updated_requirement.latest_version_info
         assert requirement_to_update.license == updated_requirement.license
@@ -74,4 +82,19 @@ class TestJSONRequirementDatabase:
         assert requirement_to_update.schema_json == updated_requirement.schema_json
         assert requirement_to_update.to_req_line == updated_requirement.to_req_line
         assert requirement_to_update.update_forward_refs == updated_requirement.update_forward_refs
+
+    def test_delete(self, json_db):
+        assert json_db.count() == 10
+
+        json_db.delete('celery')
+
+        assert json_db.count() == 9
+        assert json_db.get('celery') is None
+
+    def test_delete_not_found(self, json_db):
+        assert json_db.count() == 10
+        requirement_name = 'bla'
+        with pytest.raises(DatabaseError) as e:
+            json_db.delete(requirement_name)
+        assert str(e.value) == f'Requirement {requirement_name} not found.'
 

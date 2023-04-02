@@ -4,3 +4,7 @@ class RequirementAuditorException(Exception):
 
 class DatabaseError(RequirementAuditorException):
     pass
+
+
+class LibraryNotFoundError(RequirementAuditorException):
+    """Library not found on external services like PyPi for example."""
