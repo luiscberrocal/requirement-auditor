@@ -1,7 +1,7 @@
 import pytest
 
 from requirement_auditor.exceptions import LibraryNotFoundError
-from requirement_auditor.handlers import get_latest_version
+from requirement_auditor.handlers import get_latest_version, handle_pypi_info
 
 
 def test_get_latest_version(mocker):
@@ -40,3 +40,11 @@ def test_get_latest_version_nonexistent_lib(mocker):
 
     assert str(e.value) == f'Library {name} not found.'
     mock_get_versions.called_once()
+
+def test_handle_pypi_info():
+    name = 'django'
+    version = '3.2.18'
+    info = handle_pypi_info(name, version)
+    info_dict = info.dict()
+    print(info)
+    pytest.fail("Not implemented yet")
