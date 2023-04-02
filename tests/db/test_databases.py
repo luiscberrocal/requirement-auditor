@@ -1,9 +1,11 @@
 import json
 from datetime import datetime
 
+import pytest
 from freezegun import freeze_time
 
 from requirement_auditor.db.databases import JSONRequirementDatabase
+from requirement_auditor.exceptions import DatabaseError
 from requirement_auditor.models import PythonRequirement
 
 
@@ -88,3 +90,11 @@ class TestJSONRequirementDatabase:
 
         assert json_db.count() == 9
         assert json_db.get('celery') is None
+
+    def test_delete_not_found(self, json_db):
+        assert json_db.count() == 10
+        requirement_name = 'bla'
+        with pytest.raises(DatabaseError) as e:
+            json_db.delete(requirement_name)
+        assert str(e.value) == f'Requirement {requirement_name} not found.'
+

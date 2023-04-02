@@ -9,9 +9,6 @@ import pytest
 from requirement_auditor._legacy.settings import write_configuration, get_user_configuration_file, create_default_config
 
 
-
-
-
 def test_write_configuration(configuration_file):
     config_data = dict()
     config_data['DEFAULT'] = {'folder': Path.home(),
