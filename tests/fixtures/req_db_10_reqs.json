@@ -1,0 +1,102 @@
+{
+    "gunicorn": {
+        "name": "gunicorn",
+        "latest_version": "20.1.0",
+        "approved_version": "20.1.0",
+        "group": null,
+        "environment": "production",
+        "last_updated": "2022-12-29 10:05:21.952448",
+        "home_page": "https://github.com/benoitc/gunicorn",
+        "license": "MIT"
+    },
+    "psycopg2": {
+        "name": "psycopg2",
+        "latest_version": "2.9.5",
+        "approved_version": "2.9.5",
+        "group": null,
+        "environment": "local",
+        "last_updated": "2022-12-29 10:05:22.239939",
+        "home_page": "https://github.com/psycopg/psycopg2",
+        "license": "LGPL with exceptions"
+    },
+    "ipdb": {
+        "name": "ipdb",
+        "latest_version": "0.13.13",
+        "approved_version": "0.13.13",
+        "group": null,
+        "environment": "local",
+        "last_updated": "2023-03-31 07:16:40.849667",
+        "home_page": "https://github.com/gotcha/ipdb",
+        "license": "BSD"
+    },
+    "mypy": {
+        "name": "mypy",
+        "latest_version": "1.1.1",
+        "approved_version": "1.1.1",
+        "group": null,
+        "environment": "local",
+        "last_updated": "2023-03-07 13:18:26.216520",
+        "home_page": "https://github.com/python/mypy",
+        "license": "MIT License"
+    },
+    "factory-boy": {
+        "name": "factory-boy",
+        "latest_version": "3.2.1",
+        "approved_version": "3.2.1",
+        "group": null,
+        "environment": "local",
+        "last_updated": "2022-12-29 10:05:28.633584",
+        "home_page": "https://github.com/FactoryBoy/factory_boy",
+        "license": "MIT"
+    },
+    "pytz": {
+        "name": "pytz",
+        "latest_version": "2023.3",
+        "approved_version": "2023.3",
+        "group": null,
+        "environment": "base",
+        "last_updated": "2023-03-31 07:17:59.903483",
+        "home_page": "http://pythonhosted.org/pytz",
+        "license": "MIT"
+    },
+    "django": {
+        "name": "django",
+        "latest_version": "4.1.4",
+        "approved_version": "3.2.18",
+        "group": null,
+        "environment": "base",
+        "last_updated": "2022-12-29 10:05:33.553329",
+        "home_page": "https://www.djangoproject.com/",
+        "license": "BSD-3-Clause"
+    },
+    "django-filter": {
+        "name": "django-filter",
+        "latest_version": "23.1",
+        "approved_version": "23.1",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-03-31 07:19:30.322863",
+        "home_page": "https://github.com/carltongibson/django-filter/tree/main",
+        "license": "BSD"
+    },
+    "watchtower": {
+        "name": "watchtower",
+        "latest_version": "3.0.0",
+        "approved_version": "1.0.6",
+        "group": null,
+        "environment": "production",
+        "last_updated": "2022-12-29 10:05:22.907268",
+        "home_page": "https://github.com/kislyuk/watchtower",
+        "license": "Apache Software License"
+    },
+    "celery": {
+        "name": "celery",
+        "latest_version": "5.3.0b1",
+        "approved_version": "5.2.7",
+        "group": null,
+        "environment": "base",
+        "last_updated": "2022-12-29 10:05:32.917688",
+        "home_page": "http://celeryproject.org",
+        "license": "BSD"
+    }
+}

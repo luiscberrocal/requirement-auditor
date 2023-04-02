@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from requirement_auditor.db.databases import JSONRequirementDatabase
 from requirement_auditor.models import PythonRequirement
@@ -41,7 +42,9 @@ class TestJSONRequirementDatabase:
         assert db_dict['my-package']['home_page'] == requirement.home_page
         assert db_dict['my-package']['license'] == requirement.license
 
-    def test_update(self, json_db_file):
+    def test_update(self, mocker, json_db_file):
+        update_date = datetime(2023, 2, 3, 15, 2, 3)
+        mock_now = mocker.patch('requirement_auditor.db.databases.datetime.now', return_value=update_date)
         db = JSONRequirementDatabase(json_db_file)
         requirement = PythonRequirement(name='my-package', latest_version='2.0.3',
                                         approved_version='2.0.0')
@@ -50,19 +53,19 @@ class TestJSONRequirementDatabase:
         requirement_to_update = PythonRequirement(name='my-package', latest_version='3.0.3',
                                                   approved_version='2.0.0', home_page='https://miuc.com/mmm')
         db.update(requirement_to_update)
-
+        mock_now.called_once()
         updated_requirement = db.get(requirement.name)
 
         assert requirement_to_update.approved_version == updated_requirement.approved_version
         assert requirement_to_update.approved_version_info == updated_requirement.approved_version_info
-        assert requirement_to_update.construct == updated_requirement.construct
-        assert requirement_to_update.copy == updated_requirement.copy
         assert requirement_to_update.dict == updated_requirement.dict
         assert requirement_to_update.environment == updated_requirement.environment
         assert requirement_to_update.group == updated_requirement.group
         assert requirement_to_update.home_page == updated_requirement.home_page
         assert requirement_to_update.json == updated_requirement.json
-        assert requirement_to_update.last_updated == updated_requirement.last_updated
+
+        assert requirement_to_update.last_updated == update_date
+
         assert requirement_to_update.latest_version == updated_requirement.latest_version
         assert requirement_to_update.latest_version_info == updated_requirement.latest_version_info
         assert requirement_to_update.license == updated_requirement.license
@@ -74,4 +77,3 @@ class TestJSONRequirementDatabase:
         assert requirement_to_update.schema_json == updated_requirement.schema_json
         assert requirement_to_update.to_req_line == updated_requirement.to_req_line
         assert requirement_to_update.update_forward_refs == updated_requirement.update_forward_refs
-

@@ -82,6 +82,11 @@ class JSONRequirementDatabase(RequirementDatabase):
 
     def filter(self, **kwargs) -> List[PythonRequirement]:
         """Get a requirement by name"""
+        if kwargs:
+            raise DatabaseError('Not implemented')
+        else:
+            requirement_list = [r for _, r in self.database.items()]
+            return requirement_list
 
     def update(self, requirement: PythonRequirement, fields: List[str] | None = None) -> PythonRequirement:
         """Updates a requirement"""
