@@ -48,3 +48,8 @@ def json_db(fixtures_folder) -> JSONRequirementDatabase:
     db_file = fixtures_folder / 'req_db_10_reqs.json'
     db = JSONRequirementDatabase(db_file, create_source=False)
     return db
+@pytest.fixture()
+def json_db_full_size(fixtures_folder) -> JSONRequirementDatabase:
+    db_file = fixtures_folder / 'req_db.json'
+    db = JSONRequirementDatabase(db_file, create_source=False)
+    return db

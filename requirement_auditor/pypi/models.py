@@ -10,12 +10,12 @@ class Downloads(BaseModel):
 
 
 class ProjectUrls(BaseModel):
-    documentation: str = Field(..., alias='Documentation')
-    funding: str = Field(..., alias='Funding')
-    homepage: str = Field(..., alias='Homepage')
-    release_notes: str = Field(..., alias='Release notes')
-    source: str = Field(..., alias='Source')
-    tracker: str = Field(..., alias='Tracker')
+    documentation: Optional[str] = Field(alias='Documentation')
+    funding: Optional[str] = Field(alias='Funding')
+    homepage: Optional[str] = Field(alias='Homepage')
+    release_notes: Optional[str] = Field(alias='Release notes', default=None)
+    source: Optional[str] = Field(alias='Source', default=None)
+    tracker: Optional[str] = Field(alias='Tracker', default=None)
 
 
 class Info(BaseModel):
@@ -24,23 +24,23 @@ class Info(BaseModel):
     bugtrack_url: Any
     classifiers: List[str]
     description: str
-    description_content_type: str
+    description_content_type: str = Field(default=None)
     docs_url: Any
     download_url: str
     downloads: Downloads
     home_page: str
     keywords: str
     license: str
-    maintainer: str
-    maintainer_email: str
+    maintainer: str = Field(default=None)
+    maintainer_email: str = Field(default=None)
     name: str
     package_url: str
     platform: Any
     project_url: str
     project_urls: ProjectUrls
     release_url: str
-    requires_dist: List[str]
-    requires_python: str
+    requires_dist: Optional[List[str]]
+    requires_python: Optional[str] = Field(default=None)
     summary: str
     version: str
     yanked: bool
@@ -62,7 +62,7 @@ class Url(BaseModel):
     md5_digest: str
     packagetype: str
     python_version: str
-    requires_python: str
+    requires_python: str = Field(default=None)
     size: int
     upload_time: str
     upload_time_iso_8601: str

@@ -48,3 +48,13 @@ def test_handle_pypi_info():
     info_dict = info.dict()
     print(info)
     pytest.fail("Not implemented yet")
+
+def test_handle_pypi_info_db(json_db_full_size):
+    requirement_list = json_db_full_size.filter()
+    for i, req in enumerate(requirement_list):
+        try:
+            info = handle_pypi_info(req.name, req.approved_version)
+        except Exception as e:
+            print(f'{i} req {req.name} {req.approved_version}')
+            raise e
+
