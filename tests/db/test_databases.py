@@ -1,6 +1,8 @@
 import json
 from datetime import datetime
 
+from freezegun import freeze_time
+
 from requirement_auditor.db.databases import JSONRequirementDatabase
 from requirement_auditor.models import PythonRequirement
 
@@ -13,15 +15,17 @@ class TestJSONRequirementDatabase:
         db = JSONRequirementDatabase(db_file)
         assert db.count() == 0
 
+    @freeze_time('2023-02-03 16:40:00')
     def test_create_requirement(self, json_db_file):
+        update_date = datetime(2023, 2, 3, 16, 40, 0)
         db = JSONRequirementDatabase(json_db_file)
         requirement = PythonRequirement(name='my-package', latest_version='2.0.3',
                                         approved_version='2.0.0')
         req = db.create(requirement)
 
         assert db.count() == 1
-        assert req.last_updated is not None
-        assert requirement.last_updated is not None
+        assert req.last_updated == update_date
+        assert requirement.last_updated == update_date
 
     def test_save(self, json_db_file):
         db = JSONRequirementDatabase(json_db_file)
@@ -42,9 +46,9 @@ class TestJSONRequirementDatabase:
         assert db_dict['my-package']['home_page'] == requirement.home_page
         assert db_dict['my-package']['license'] == requirement.license
 
-    def test_update(self, mocker, json_db_file):
-        update_date = datetime(2023, 2, 3, 15, 2, 3)
-        mock_now = mocker.patch('requirement_auditor.db.databases.datetime.now', return_value=update_date)
+    @freeze_time('2023-02-03 16:40:00')
+    def test_update(self, json_db_file):
+        update_date = datetime(2023, 2, 3, 16, 40, 0)
         db = JSONRequirementDatabase(json_db_file)
         requirement = PythonRequirement(name='my-package', latest_version='2.0.3',
                                         approved_version='2.0.0')
@@ -53,7 +57,6 @@ class TestJSONRequirementDatabase:
         requirement_to_update = PythonRequirement(name='my-package', latest_version='3.0.3',
                                                   approved_version='2.0.0', home_page='https://miuc.com/mmm')
         db.update(requirement_to_update)
-        mock_now.called_once()
         updated_requirement = db.get(requirement.name)
 
         assert requirement_to_update.approved_version == updated_requirement.approved_version
