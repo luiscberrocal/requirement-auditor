@@ -41,6 +41,7 @@ def test_get_latest_version_nonexistent_lib(mocker):
     assert str(e.value) == f'Library {name} not found.'
     mock_get_versions.called_once()
 
+
 def test_handle_pypi_info():
     name = 'django'
     version = '3.2.18'
@@ -48,6 +49,7 @@ def test_handle_pypi_info():
     info_dict = info.dict()
     print(info)
     pytest.fail("Not implemented yet")
+
 
 def test_handle_pypi_info_db(json_db_full_size):
     requirement_list = json_db_full_size.filter()
@@ -57,4 +59,3 @@ def test_handle_pypi_info_db(json_db_full_size):
         except Exception as e:
             print(f'{i} req {req.name} {req.approved_version}')
             raise e
-
