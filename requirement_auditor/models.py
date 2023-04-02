@@ -18,6 +18,12 @@ def convert_version_to_tuples(version: str):
     return version_info
 
 
+class PinnedRequirement(BaseModel):
+    name: str
+    version: str
+    comment: Optional[str] = Field(default=None)
+
+
 class PythonRequirement(BaseModel):
     name: str
     latest_version: str
@@ -59,3 +65,10 @@ class PythonRequirement(BaseModel):
             ]
         )
         return version_info
+
+
+class ParsedLine(BaseModel):
+    line_number: int
+    raw: str
+    pinned: PinnedRequirement = Field(default=None)
+    db_requirement: Optional[PythonRequirement] = Field(default=None)
