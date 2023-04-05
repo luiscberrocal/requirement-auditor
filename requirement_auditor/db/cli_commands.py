@@ -10,9 +10,15 @@ Add one requirement
 requirement-auditor database add --name django
 
 """
+import click
+
+@click.group()
+def database():
+    pass
 
 
-def database(action: str, name: str | None = None) -> None:
+@click.command(help='Database update database')
+def update(name: str | None = None) -> None:
     pass
 
 

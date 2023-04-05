@@ -32,3 +32,13 @@ def backup_file(filename: Path, backup_folder: Path, add_version: bool = True) -
                         f' error: {e}'
         logger.error(error_message)
         raise RequirementAuditorException(error_message)
+
+
+def convert_version_to_tuples(version: str):
+    version_info = tuple(
+        [
+            int(num) if num.isdigit() else num
+            for num in version.replace("-", ".", 1).split(".")
+        ]
+    )
+    return version_info

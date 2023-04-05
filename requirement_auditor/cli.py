@@ -3,6 +3,7 @@ import sys
 
 import click
 
+from requirement_auditor.db.cli_commands import database
 from . import __version__ as current_version
 
 
@@ -11,5 +12,7 @@ from . import __version__ as current_version
 def main():
     pass
 
+
+main.add_command(database)
 if __name__ == "__main__":
     sys.exit(main())  # pragma: no cover
