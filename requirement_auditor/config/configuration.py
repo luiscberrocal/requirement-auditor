@@ -7,7 +7,7 @@ import toml
 
 from .. import exceptions
 from ..exceptions import ConfigurationError
-from ..utis import backup_file
+from ..utils import backup_file
 
 
 class ConfigurationManager:
