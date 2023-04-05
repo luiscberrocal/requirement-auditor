@@ -6,6 +6,8 @@ from typing import Dict, Any, Optional
 import toml
 
 from .. import exceptions
+from ..exceptions import ConfigurationError
+from ..utis import backup_file
 
 
 class ConfigurationManager:
@@ -13,12 +15,13 @@ class ConfigurationManager:
     DEFAULT_CONFIG_FILENAME = 'configuration.toml'
     APP_NAME = 'requirement-auditor'
 
-    def __init__(self, config_folder: Optional[Path] = None,
+    def __init__(self, home_folder: Optional[Path] = None,
                  config_filename: Optional[str] = None):
-        if config_folder is None:
+        if home_folder is None:
             self.config_folder = Path().home() / self.DEFAULT_CONFIG_FOLDER_NAME
         else:
-            self.config_folder = config_folder
+            self.config_folder = home_folder / self.DEFAULT_CONFIG_FOLDER_NAME
+
         if config_filename is None:
             self.config_file = self.config_folder / self.DEFAULT_CONFIG_FILENAME
         else:
@@ -94,7 +97,5 @@ class ConfigurationManager:
         config = cls()
         return config.get_configuration()
 
-def get_report_info(configuration_manager:ConfigurationManager, output_folder):
-    pass
 
 

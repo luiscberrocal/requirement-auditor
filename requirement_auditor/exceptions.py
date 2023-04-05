@@ -8,3 +8,7 @@ class DatabaseError(RequirementAuditorException):
 
 class LibraryNotFoundError(RequirementAuditorException):
     """Library not found on external services like PyPi for example."""
+
+class ConfigurationError(RequirementAuditorException):
+    pass
+

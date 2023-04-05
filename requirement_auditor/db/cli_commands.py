@@ -10,3 +10,9 @@ Add one requirement
 requirement-auditor database add --name django
 
 """
+
+
+def database(action: str, name: str | None = None) -> None:
+    pass
+
+
