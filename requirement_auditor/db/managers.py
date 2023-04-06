@@ -25,12 +25,15 @@ def update_single_requirement(requirement: PythonRequirement,
     updated = False
     version = get_latest_version(requirement.name, stable_only=stable_only)
     version_tuple = convert_version_to_tuples(version)
+    new_requirement = None
+
     if version_tuple > requirement.latest_version_info:
         new_requirement = requirement.copy()
         new_requirement.latest_version = version
         updated = True
-        return new_requirement, updated
     if fields is not None:
         raise RequirementAuditorException('Not implemented')
 
+    if updated:
+        return new_requirement, updated
     return requirement, updated
