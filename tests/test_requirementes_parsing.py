@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from requirement_auditor._legacy.requirements import RequirementFile, PythonRequirement
+from requirement_auditor._legacy.requirements.parsing import RequirementFile, PythonRequirement
 
 
 def test_iter_requirement_file():

@@ -5,7 +5,6 @@ from typing import Dict, Any, Optional
 
 import toml
 
-from .. import exceptions
 from ..exceptions import ConfigurationError
 from ..utils import backup_file
 
