@@ -13,7 +13,6 @@ def update_requirements(database: RequirementDatabase,
     requirements = database.all()
     updated_requirements = list()
     for requirement in requirements:
-        print(requirement.name)
         updated_requirement, updated = update_single_requirement(requirement, stable_only=stable_only)
         if updated:
             updated_requirements.append(updated_requirement)

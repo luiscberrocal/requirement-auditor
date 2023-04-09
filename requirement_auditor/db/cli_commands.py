@@ -33,7 +33,8 @@ def update(name: str | None = None) -> None:
         logger.info('Started updating...')
         requirements_to_update = update_requirements(DATABASE)
         for req in requirements_to_update:
-            msg = f'{req.name}'
+            db_req = DATABASE.get(req.name)
+            msg = f'{req.name} latest_version {req.latest_version} > {db_req.latest_version}'
             click.secho(msg, fg='green')
     else:
         requirement = DATABASE.get(name)
