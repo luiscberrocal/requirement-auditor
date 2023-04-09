@@ -60,6 +60,8 @@ class TestJSONRequirementDatabase:
         requirement_to_update = PythonRequirement(name='my-package', latest_version='3.0.3',
                                                   approved_version='2.0.0', home_page='https://miuc.com/mmm')
         db.update(requirement_to_update)
+        db.save()
+        db._load_db()
         updated_requirement = db.get(requirement.name)
 
         assert requirement_to_update.approved_version == updated_requirement.approved_version

@@ -166,7 +166,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2023-03-31 07:17:35.499925",
-        "home_page": " https://github.com/psf/black",
+        "home_page": "https://github.com/psf/black",
         "license": "MIT"
     },
     "pylint-django": {
@@ -216,7 +216,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2022-12-29 10:05:28.973369",
-        "home_page": "https://github.com/jazzband/django-debug-toolbar" ,
+        "home_page": "https://github.com/jazzband/django-debug-toolbar",
         "license": "BSD-3-Clause"
     },
     "django-extensions": {

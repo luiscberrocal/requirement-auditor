@@ -42,7 +42,7 @@ def update(name: str | None = None) -> None:
                 DATABASE.update(req, fields=['approved_version', 'latest_version'])
             else:
                 DATABASE.update(req, fields=['latest_version'])
-        DATABASE.save()
+            DATABASE.save()
 
     else:
         requirement = DATABASE.get(name)
