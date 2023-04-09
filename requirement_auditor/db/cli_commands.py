@@ -21,7 +21,7 @@ def database():
 @click.command(help='Database update database')
 @click.option('-n', '--name')
 def update(name: str | None = None) -> None:
-    pass
+    print('Update database')
 
 
 database.add_command(update)

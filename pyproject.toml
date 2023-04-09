@@ -4,7 +4,10 @@ version = "2.0.0"
 description = "Tool to keep track of used requirements."
 authors = ["Luis C. Berrocal <luis.berrocal.1942@gmail.com>"]
 readme = "README.md"
-packages = [{include = "requirement_auditor"}]
+packages = [{ include = "requirement_auditor" }]
+
+[tool.poetry.scripts]
+requirement-auditor = 'requirement_auditor.cli:main'
 
 [tool.poetry.dependencies]
 python = "^3.10"

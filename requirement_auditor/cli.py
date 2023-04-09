@@ -12,7 +12,6 @@ from . import __version__ as current_version
 def main():
     pass
 
-main.add_command(database)
 
 main.add_command(database)
 if __name__ == "__main__":
