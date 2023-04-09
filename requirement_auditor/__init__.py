@@ -13,7 +13,10 @@ from requirement_auditor.db.databases import JSONRequirementDatabase
 def logger_configuration():
     import logging.config
     from requirement_auditor.settings import LOGGING
+    from johnnydep.logs import configure_logging
     logging.config.dictConfig(LOGGING)
+    configure_logging(1)
+
 
 
 

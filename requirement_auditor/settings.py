@@ -17,7 +17,7 @@ except KeyError:
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": False,
+    "disable_existing_loggers": True,
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s %(lineno)d  "
@@ -41,7 +41,12 @@ LOGGING = {
     },
     "loggers": {
         'requirement_auditor': {
-            "level": "DEBUG",
+            "level": "INFO",
+            "handlers": ['console', 'file'],
+            "propagate": False
+        },
+        'johnnydep': {
+            "level": "INFO",
             "handlers": ['console', 'file'],
             "propagate": False
         },
