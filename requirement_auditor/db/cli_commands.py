@@ -28,15 +28,15 @@ def database():
 def update(name: str | None = None) -> None:
     print('Update database')
     if name is None:
-        requirement = DATABASE.get(name)
-        if requirement is None:
-            click.secho(f'No requirement {name} found.', fg='yellow')
-        req, updated = update_single_requirement(requirement)
-    else:
         requirements_to_update = update_requirements(DATABASE)
         for req in requirements_to_update:
             msg = f'{req.name}'
             click.secho(msg, fg='green')
+    else:
+        requirement = DATABASE.get(name)
+        if requirement is None:
+            click.secho(f'No requirement {name} found.', fg='yellow')
+        req, updated = update_single_requirement(requirement)
 
 
 database.add_command(update)
