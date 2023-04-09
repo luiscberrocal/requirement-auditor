@@ -34,8 +34,16 @@ def update(name: str | None = None) -> None:
         requirements_to_update = update_requirements(DATABASE)
         for req in requirements_to_update:
             db_req = DATABASE.get(req.name)
-            msg = f'{req.name} latest_version {req.latest_version} > {db_req.latest_version}'
+            msg = f'{req.name} latest_version {req.latest_version} > {db_req.latest_version} ' \
+                  f'approved: {db_req.approved_version}'
             click.secho(msg, fg='green')
+            update = click.prompt('Updated approved [y/n]?')
+            if update.upper() == 'Y':
+                DATABASE.update(req, fields=['approved_version', 'latest_version'])
+            else:
+                DATABASE.update(req, fields=['latest_version'])
+        DATABASE.save()
+
     else:
         requirement = DATABASE.get(name)
         if requirement is None:
