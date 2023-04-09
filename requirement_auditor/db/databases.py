@@ -25,6 +25,10 @@ class RequirementDatabase(ABC):
         """Get a requirement by name"""
 
     @abstractmethod
+    def all(self) -> List[PythonRequirement]:
+        """Gets all requirements in the database"""
+
+    @abstractmethod
     def filter(self, **kwargs) -> List[PythonRequirement]:
         """Get a requirement by name"""
 
@@ -85,8 +89,11 @@ class JSONRequirementDatabase(RequirementDatabase):
         if kwargs:
             raise DatabaseError('Not implemented')
         else:
-            requirement_list = [r for _, r in self.database.items()]
-            return requirement_list
+            return self.all()
+
+    def all(self) -> List[PythonRequirement]:
+        requirement_list = [r for _, r in self.database.items()]
+        return requirement_list
 
     def update(self, requirement: PythonRequirement, fields: List[str] | None = None) -> PythonRequirement:
         """Updates a requirement"""

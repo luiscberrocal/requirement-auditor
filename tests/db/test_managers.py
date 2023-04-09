@@ -1,0 +1,29 @@
+from unittest import mock
+
+from requirement_auditor.db.managers import update_single_requirement, update_requirements
+
+
+def test_update_single_requirement(mocker, json_db):
+    latest_mocked_version = '5.0.5'
+    mocker.patch('requirement_auditor.db.managers.get_latest_version', return_value=latest_mocked_version)
+    requirement = json_db.get('django')
+    assert requirement.latest_version == '4.1.4'
+
+    new_requirement, updated = update_single_requirement(requirement, stable_only=True)
+
+    assert updated
+    assert new_requirement.latest_version == latest_mocked_version
+    assert id(new_requirement) != id(requirement)
+
+
+def test_update_requirements(mocker, json_db):
+    def mock_get_latest_version(name: str):
+        if name == 'django':
+            return '5.2.0'
+        else:
+            return '1.2.0'
+
+    with mock.patch.object(mock_get_latest_version, 'requirement_auditor.db.managers.get_latest_version'):
+        updatable_requirements = update_requirements(json_db)
+        for req in updatable_requirements:
+            print(req.name)

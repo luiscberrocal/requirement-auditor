@@ -13,9 +13,10 @@ class TestJSONRequirementDatabase:
 
     def test_blank_db(self, output_folder):
         db_file = output_folder / 'tmp.json'
-        db_file.unlink()
+        db_file.unlink(missing_ok=True)
         db = JSONRequirementDatabase(db_file)
         assert db.count() == 0
+        db_file.unlink(missing_ok=True)
 
     @freeze_time('2023-02-03 16:40:00')
     def test_create_requirement(self, json_db_file):

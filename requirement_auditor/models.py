@@ -8,16 +8,6 @@ def convert_datetime_to_iso_8601_with_z_suffix(dt: datetime) -> str:
     return dt.strftime('%Y-%m-%dT%H:%M:%SZ')
 
 
-def convert_version_to_tuples(version: str):
-    version_info = tuple(
-        [
-            int(num) if num.isdigit() else num
-            for num in version.replace("-", ".", 1).split(".")
-        ]
-    )
-    return version_info
-
-
 class PinnedRequirement(BaseModel):
     name: str
     version: str
