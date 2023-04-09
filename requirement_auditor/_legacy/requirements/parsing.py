@@ -1,4 +1,5 @@
 import re
+from pathlib import Path
 from typing import List, Union
 
 from requirement_auditor.exceptions import RequirementAuditorException
@@ -62,7 +63,7 @@ class PythonRequirement:
 
 class RequirementFile:
 
-    def __init__(self, filename: str):
+    def __init__(self, filename: Path):
         self.filename = filename
         self.requirement_list: Union[List[PythonRequirement], None] = None
 

@@ -3,10 +3,10 @@ from pathlib import Path
 from requirement_auditor._legacy.requirements.parsing import RequirementFile, PythonRequirement
 
 
-def test_iter_requirement_file():
-    filename = Path(__file__).parent / 'fixtures/requirements_dev.txt'
+def test_iter_requirement_file(fixtures_folder):
+    filename = fixtures_folder / 'requirements_dev.txt'
     requirement_file = RequirementFile(filename)
-    assert len(requirement_file.requirements) == 13
+    assert len(requirement_file.requirements) == 21
     assert requirement_file.requirements[0].name == 'pip'
     assert requirement_file.requirements[0].versions[0].operator == '=='
     assert requirement_file.requirements[0].versions[0].version == '21.3.1'
