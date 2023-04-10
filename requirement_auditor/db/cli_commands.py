@@ -39,9 +39,11 @@ def update(name: str | None = None) -> None:
             click.secho(msg, fg='green')
             update = click.prompt('Updated approved [y/n]?')
             if update.upper() == 'Y':
-                DATABASE.update(req, fields=['approved_version', 'latest_version'])
+                req.approved_version = req.latest_version
+                DATABASE.update(req)  # , fields=['approved_version', 'latest_version'])
             else:
-                DATABASE.update(req, fields=['latest_version'])
+                pass
+                # DATABASE.update(req, fields=['latest_version'])
             DATABASE.save()
 
     else:
