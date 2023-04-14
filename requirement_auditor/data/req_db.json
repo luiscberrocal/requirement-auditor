@@ -488,5 +488,55 @@
         "last_updated": "2023-03-31 07:19:30.322863",
         "home_page": "https://github.com/carltongibson/django-filter/tree/main",
         "license": "BSD"
+    },
+    "Faker": {
+        "name": "Faker",
+        "latest_version": "18.4.0",
+        "approved_version": "18.4.0",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:15:25.602625",
+        "home_page": "https://github.com/joke2k/faker",
+        "license": "MIT License"
+    },
+    "tox": {
+        "name": "tox",
+        "latest_version": "4.4.9",
+        "approved_version": "4.4.9",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:17:19.798430",
+        "home_page": null,
+        "license": null
+    },
+    "pip": {
+        "name": "pip",
+        "latest_version": "23.0.1",
+        "approved_version": "23.0.1",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:17:36.230683",
+        "home_page": "https://pip.pypa.io/",
+        "license": "MIT"
+    },
+    "wheel": {
+        "name": "wheel",
+        "latest_version": "0.40.0",
+        "approved_version": "0.40.0",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:18:02.363222",
+        "home_page": null,
+        "license": null
+    },
+    "watchdog": {
+        "name": "watchdog",
+        "latest_version": "3.0.0",
+        "approved_version": "3.0.0",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:19:23.735521",
+        "home_page": "https://github.com/gorakhargosh/watchdog",
+        "license": "Apache License 2.0"
     }
 }
