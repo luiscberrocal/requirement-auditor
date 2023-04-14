@@ -31,11 +31,11 @@
     },
     "watchtower": {
         "name": "watchtower",
-        "latest_version": "3.0.0",
-        "approved_version": "1.0.6",
+        "latest_version": "3.0.1",
+        "approved_version": "3.0.1",
         "group": null,
         "environment": "production",
-        "last_updated": "2022-12-29 10:05:22.907268",
+        "last_updated": "2023-04-14 11:05:46.196110",
         "home_page": "https://github.com/kislyuk/watchtower",
         "license": "Apache Software License"
     },
