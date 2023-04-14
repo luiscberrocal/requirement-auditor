@@ -1,0 +1,15 @@
+[application]
+timestamp_format = "%Y%m%d_%H%M%S"
+
+[logs]
+folder = "/home/luiscberrocal/.requirement_auditor/logs"
+filename = "requirement-auditor.log"
+backup_count = 3
+
+[application.database_folder]
+folder = "/home/luiscberrocal/PycharmProjects/requirement-auditor/requirement_auditor/data"
+prompt = "Database folder"
+
+[application.database_file]
+file = "/home/luiscberrocal/PycharmProjects/requirement-auditor/requirement_auditor/data/req_db.json"
+prompt = "Database file"

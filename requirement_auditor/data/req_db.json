@@ -11,31 +11,31 @@
     },
     "psycopg2": {
         "name": "psycopg2",
-        "latest_version": "2.9.5",
-        "approved_version": "2.9.5",
+        "latest_version": "2.9.6",
+        "approved_version": "2.9.6",
         "group": null,
         "environment": "local",
-        "last_updated": "2022-12-29 10:05:22.239939",
+        "last_updated": "2023-04-10 10:53:10.367471",
         "home_page": "https://github.com/psycopg/psycopg2",
         "license": "LGPL with exceptions"
     },
     "sentry-sdk": {
         "name": "sentry-sdk",
-        "latest_version": "1.18.0",
-        "approved_version": "1.18.0",
+        "latest_version": "1.19.1",
+        "approved_version": "1.19.1",
         "group": null,
         "environment": "production",
-        "last_updated": "2023-03-31 07:16:25.956103",
+        "last_updated": "2023-04-10 10:53:14.975141",
         "home_page": "https://github.com/getsentry/sentry-python",
         "license": "BSD"
     },
     "watchtower": {
         "name": "watchtower",
-        "latest_version": "3.0.0",
-        "approved_version": "1.0.6",
+        "latest_version": "3.0.1",
+        "approved_version": "3.0.1",
         "group": null,
         "environment": "production",
-        "last_updated": "2022-12-29 10:05:22.907268",
+        "last_updated": "2023-04-14 11:05:46.196110",
         "home_page": "https://github.com/kislyuk/watchtower",
         "license": "Apache Software License"
     },
@@ -61,11 +61,11 @@
     },
     "mypy": {
         "name": "mypy",
-        "latest_version": "1.1.1",
-        "approved_version": "1.1.1",
+        "latest_version": "1.2.0",
+        "approved_version": "1.2.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-07 13:18:26.216520",
+        "last_updated": "2023-04-10 10:53:22.661228",
         "home_page": "https://github.com/python/mypy",
         "license": "MIT License"
     },
@@ -81,21 +81,21 @@
     },
     "pytest": {
         "name": "pytest",
-        "latest_version": "7.2.2",
-        "approved_version": "7.2.2",
+        "latest_version": "7.3.0",
+        "approved_version": "7.3.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-07 13:18:37.492004",
+        "last_updated": "2023-04-10 10:53:26.857936",
         "home_page": "https://github.com/pytest-dev/pytest",
         "license": "MIT"
     },
     "pytest-sugar": {
         "name": "pytest-sugar",
-        "latest_version": "0.9.6",
-        "approved_version": "0.9.6",
+        "latest_version": "0.9.7",
+        "approved_version": "0.9.7",
         "group": null,
         "environment": "local",
-        "last_updated": "2022-12-29 10:05:24.886177",
+        "last_updated": "2023-04-10 10:53:30.857086",
         "home_page": "https://github.com/Frozenball/pytest-sugar",
         "license": "BSD"
     },
@@ -151,11 +151,11 @@
     },
     "coverage": {
         "name": "coverage",
-        "latest_version": "7.2.2",
-        "approved_version": "7.2.2",
+        "latest_version": "7.2.3",
+        "approved_version": "7.2.3",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-31 07:17:27.109704",
+        "last_updated": "2023-04-10 10:53:35.737642",
         "home_page": "https://github.com/nedbat/coveragepy",
         "license": "Apache-2.0"
     },
@@ -166,7 +166,7 @@
         "group": null,
         "environment": "local",
         "last_updated": "2023-03-31 07:17:35.499925",
-        "home_page": " https://github.com/psf/black",
+        "home_page": "https://github.com/psf/black",
         "license": "MIT"
     },
     "pylint-django": {
@@ -191,11 +191,11 @@
     },
     "pre-commit": {
         "name": "pre-commit",
-        "latest_version": "3.2.1",
-        "approved_version": "3.2.1",
+        "latest_version": "3.2.2",
+        "approved_version": "3.2.2",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-03-31 07:17:43.966044",
+        "last_updated": "2023-04-10 10:53:41.628501",
         "home_page": "https://github.com/pre-commit/pre-commit",
         "license": "MIT"
     },
@@ -211,12 +211,12 @@
     },
     "django-debug-toolbar": {
         "name": "django-debug-toolbar",
-        "latest_version": "3.8.1",
-        "approved_version": "3.8.1",
+        "latest_version": "4.0.0",
+        "approved_version": "4.0.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2022-12-29 10:05:28.973369",
-        "home_page": "https://github.com/jazzband/django-debug-toolbar" ,
+        "last_updated": "2023-04-10 10:53:46.312981",
+        "home_page": "https://github.com/jazzband/django-debug-toolbar",
         "license": "BSD-3-Clause"
     },
     "django-extensions": {
@@ -281,11 +281,11 @@
     },
     "Pillow": {
         "name": "Pillow",
-        "latest_version": "9.4.0",
-        "approved_version": "9.4.0",
+        "latest_version": "9.5.0",
+        "approved_version": "9.5.0",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-03-01 10:54:47.565663",
+        "last_updated": "2023-04-10 10:53:48.758620",
         "home_page": "https://github.com/python-pillow/Pillow",
         "license": "HPND"
     },
@@ -311,11 +311,11 @@
     },
     "redis": {
         "name": "redis",
-        "latest_version": "4.5.1",
-        "approved_version": "4.5.1",
+        "latest_version": "4.5.4",
+        "approved_version": "4.5.4",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-03-01 10:55:03.020973",
+        "last_updated": "2023-04-10 10:53:54.249399",
         "home_page": "https://github.com/redis/redis-py",
         "license": "MIT"
     },
@@ -381,11 +381,11 @@
     },
     "django-allauth": {
         "name": "django-allauth",
-        "latest_version": "0.53.1",
-        "approved_version": "0.53.1",
+        "latest_version": "0.54.0",
+        "approved_version": "0.54.0",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-03-31 07:19:05.427417",
+        "last_updated": "2023-04-10 10:54:00.206561",
         "home_page": "http://www.intenct.nl/projects/django-allauth/",
         "license": ""
     },
@@ -488,5 +488,55 @@
         "last_updated": "2023-03-31 07:19:30.322863",
         "home_page": "https://github.com/carltongibson/django-filter/tree/main",
         "license": "BSD"
+    },
+    "Faker": {
+        "name": "Faker",
+        "latest_version": "18.4.0",
+        "approved_version": "18.4.0",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:15:25.602625",
+        "home_page": "https://github.com/joke2k/faker",
+        "license": "MIT License"
+    },
+    "tox": {
+        "name": "tox",
+        "latest_version": "4.4.9",
+        "approved_version": "4.4.9",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:17:19.798430",
+        "home_page": null,
+        "license": null
+    },
+    "pip": {
+        "name": "pip",
+        "latest_version": "23.0.1",
+        "approved_version": "23.0.1",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:17:36.230683",
+        "home_page": "https://pip.pypa.io/",
+        "license": "MIT"
+    },
+    "wheel": {
+        "name": "wheel",
+        "latest_version": "0.40.0",
+        "approved_version": "0.40.0",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:18:02.363222",
+        "home_page": null,
+        "license": null
+    },
+    "watchdog": {
+        "name": "watchdog",
+        "latest_version": "3.0.0",
+        "approved_version": "3.0.0",
+        "group": null,
+        "environment": null,
+        "last_updated": "2023-04-14 10:19:23.735521",
+        "home_page": "https://github.com/gorakhargosh/watchdog",
+        "license": "Apache License 2.0"
     }
 }

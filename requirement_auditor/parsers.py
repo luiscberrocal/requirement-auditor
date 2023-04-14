@@ -1,9 +1,13 @@
-import re
 from pathlib import Path
-from typing import List, Dict, Any, Pattern
+import logging
+from pathlib import Path
+from typing import List, Pattern
 
+from . import DATABASE
 from .models import ParsedLine
 from .settings import FULLY_PINNED_REGEX
+
+logger = logging.getLogger(__name__)
 
 
 def parse_line(line: str, line_number: int, regexp: Pattern = FULLY_PINNED_REGEX) -> ParsedLine:
@@ -26,3 +30,26 @@ def parse_requirement_file(req_file: Path, regexp: Pattern = FULLY_PINNED_REGEX)
         parsed_line = parse_line(line, i, regexp=regexp)
         parsed_requirements.append(parsed_line)
     return parsed_requirements
+
+
+def parse_and_update(req_file, regexp: Pattern = FULLY_PINNED_REGEX) -> int:
+    parsed_lines = parse_requirement_file(req_file, regexp=regexp)
+    updated = 0
+    for parsed_line in parsed_lines:
+        if parsed_line.pinned is not None:
+            db_requirement = DATABASE.get(parsed_line.pinned.name)
+            if db_requirement is not None:
+                parsed_line.db_requirement = db_requirement
+            else:
+                logger.warning(f'Found requirement in file {req_file} not found in db.')
+            print(parsed_line.pinned.name, parsed_line.pinned.version, parsed_line.db_requirement)
+    with open(req_file, 'w') as rf:
+        for parsed_line in parsed_lines:
+            if parsed_line.pinned is None or parsed_line.db_requirement is None:
+                rf.write(f'{parsed_line.raw}\n')
+            else:
+                comment = f'# {parsed_line.db_requirement.home_page}'
+                rf.write(f'{parsed_line.db_requirement.name} == {parsed_line.db_requirement.approved_version} '
+                         f'{comment}\n')
+                updated += 1
+    return updated

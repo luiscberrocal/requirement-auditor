@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Dict, Any, List
 
 from requirement_auditor.db.databases import JSONReqDatabase
+from requirement_auditor.utils import convert_version_to_tuples
 
 
 # def parse_for_permitted_libs(req_file: Path):
