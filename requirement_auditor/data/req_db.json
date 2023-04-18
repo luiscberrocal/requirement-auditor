@@ -81,11 +81,11 @@
     },
     "pytest": {
         "name": "pytest",
-        "latest_version": "7.3.0",
-        "approved_version": "7.3.0",
+        "latest_version": "7.3.1",
+        "approved_version": "7.3.1",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-04-10 10:53:26.857936",
+        "last_updated": "2023-04-18 13:33:27.136565",
         "home_page": "https://github.com/pytest-dev/pytest",
         "license": "MIT"
     },
@@ -511,11 +511,11 @@
     },
     "pip": {
         "name": "pip",
-        "latest_version": "23.0.1",
-        "approved_version": "23.0.1",
+        "latest_version": "23.1",
+        "approved_version": "23.1",
         "group": null,
         "environment": null,
-        "last_updated": "2023-04-14 10:17:36.230683",
+        "last_updated": "2023-04-18 13:33:45.890829",
         "home_page": "https://pip.pypa.io/",
         "license": "MIT"
     },

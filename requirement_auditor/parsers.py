@@ -35,6 +35,7 @@ def parse_requirement_file(req_file: Path, regexp: Pattern = FULLY_PINNED_REGEX)
 def parse_and_update(req_file, regexp: Pattern = FULLY_PINNED_REGEX) -> int:
     parsed_lines = parse_requirement_file(req_file, regexp=regexp)
     updated = 0
+
     for parsed_line in parsed_lines:
         if parsed_line.pinned is not None:
             db_requirement = DATABASE.get(parsed_line.pinned.name)
@@ -44,6 +45,7 @@ def parse_and_update(req_file, regexp: Pattern = FULLY_PINNED_REGEX) -> int:
                 logger.warning(f'Found requirement in file {req_file} not found in db.')
             print(parsed_line.pinned.name, parsed_line.pinned.version, parsed_line.db_requirement)
     with open(req_file, 'w') as rf:
+        logger.info(f'Writing {req_file}')
         for parsed_line in parsed_lines:
             if parsed_line.pinned is None or parsed_line.db_requirement is None:
                 rf.write(f'{parsed_line.raw}\n')
