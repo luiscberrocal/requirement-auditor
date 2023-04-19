@@ -3,6 +3,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, HttpUrl
 
+from requirement_auditor.utils import convert_version_to_tuples
+
 
 def convert_datetime_to_iso_8601_with_z_suffix(dt: datetime) -> str:
     return dt.strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -62,3 +64,35 @@ class ParsedLine(BaseModel):
     raw: str
     pinned: PinnedRequirement = Field(default=None)
     db_requirement: Optional[PythonRequirement] = Field(default=None)
+
+
+class VersionNumber(BaseModel):
+    major: int
+    minor: int
+    patch: Optional[int | str]
+
+    def __str__(self):
+        if self.patch is None:
+            return f'{self.major}.{self.minor}'
+        else:
+            return f'{self.major}.{self.minor}.{self.patch}'
+
+    def __ge__(self, other):
+        if type(other.patch) == type(self.patch):
+            return convert_version_to_tuples(str(self)) >= convert_version_to_tuples(str(other))
+        else:
+            condition1 = (self.major, self.minor) >= (other.major, other.minor)
+            if condition1 and isinstance(other.patch, str):
+                return True
+            else:
+                return False
+
+    def __gt__(self, other):
+        if type(other.patch) == type(self.patch):
+            return convert_version_to_tuples(str(self)) > convert_version_to_tuples(str(other))
+        else:
+            condition1 = (self.major, self.minor) > (other.major, other.minor)
+            if condition1 and isinstance(other.patch, str):
+                return True
+            else:
+                return False
