@@ -3,6 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, HttpUrl
 
+from requirement_auditor.exceptions import ParsingError
 from requirement_auditor.utils import convert_version_to_tuples
 
 
@@ -73,8 +74,18 @@ class VersionNumber(BaseModel):
 
     @staticmethod
     def parse(version: str):
-        major, minor, patch = convert_version_to_tuples(version)
-        return VersionNumber(major=major, minor=minor, patch=patch)
+        try:
+            version_tuple = convert_version_to_tuples(version)
+            if len(version_tuple) == 2:
+                patch = 0
+            else:
+                patch = version_tuple[2]
+            major = version_tuple[0]
+            minor = version_tuple[1]
+            return VersionNumber(major=major, minor=minor, patch=patch)
+        except ValueError as e:
+            msg = f'Could not parse version {version}. Error {e}'
+            raise ParsingError(msg)
 
     def __str__(self):
         if self.patch is None:

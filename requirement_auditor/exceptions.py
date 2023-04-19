@@ -12,3 +12,6 @@ class LibraryNotFoundError(RequirementAuditorException):
 class ConfigurationError(RequirementAuditorException):
     pass
 
+
+class ParsingError(RequirementAuditorException):
+    """Error parsing"""

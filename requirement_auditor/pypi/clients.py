@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 import httpx
 import requests
 
+from requirement_auditor.models import VersionNumber
 from requirement_auditor.pypi.models import PyPiResponse
 from requirement_auditor.utils import convert_version_to_tuples
 
@@ -29,7 +30,7 @@ class SyncPyPiClient(PyPiClient):
             releases = results.get('releases')
             if releases is None:
                 return []
-            t_version = [convert_version_to_tuples(x) for x in releases.keys()]
+            t_version = [VersionNumber.parse(x) for x in releases.keys()]
             t_version = sorted(t_version)
 
             return t_version
