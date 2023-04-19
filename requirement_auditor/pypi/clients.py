@@ -7,7 +7,7 @@ from requirement_auditor.pypi.models import PyPiResponse
 
 
 class PyPiClient(ABC):
-    _base_url: str = 'https://pypi.org/pypi/'
+    _base_url: str = 'https://pypi.org/pypi'
 
     @abstractmethod
     def get_versions(self, name: str):
@@ -21,7 +21,12 @@ class PyPiClient(ABC):
 class SyncPyPiClient(PyPiClient):
 
     def get_versions(self, name: str):
-        pass
+        url = f'{self._base_url}/{name}/json'
+        response = requests.get(url)
+        if response.status_code == 200:
+            results = response.json()
+            releases = results.get('releases')
+            return releases.keys()
 
     def get_info(self, name: str, version: str) -> PyPiResponse:
         url = f'{self._base_url}/{name}/{version}/json'
