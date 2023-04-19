@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+import httpx
 import requests
 
 from requirement_auditor.pypi.models import PyPiResponse
@@ -25,6 +26,20 @@ class SyncPyPiClient(PyPiClient):
     def get_info(self, name: str, version: str) -> PyPiResponse:
         url = f'{self._base_url}/{name}/{version}/json'
         response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            pypi_response = PyPiResponse(**data)
+            return pypi_response
+
+
+class ASyncPyPiClient(PyPiClient):
+
+    def get_versions(self, name: str):
+        pass
+
+    def get_info(self, name: str, version: str) -> PyPiResponse:
+        url = f'{self._base_url}/{name}/{version}/json'
+        response = httpx.get(url)
         if response.status_code == 200:
             data = response.json()
             pypi_response = PyPiResponse(**data)
