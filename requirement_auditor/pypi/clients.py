@@ -4,6 +4,7 @@ import httpx
 import requests
 
 from requirement_auditor.pypi.models import PyPiResponse
+from requirement_auditor.utils import convert_version_to_tuples
 
 
 class PyPiClient(ABC):
@@ -26,7 +27,12 @@ class SyncPyPiClient(PyPiClient):
         if response.status_code == 200:
             results = response.json()
             releases = results.get('releases')
-            return releases.keys()
+            if releases is None:
+                return []
+            t_version = [convert_version_to_tuples(x) for x in releases.keys()]
+            t_version = sorted(t_version)
+
+            return t_version
 
     def get_info(self, name: str, version: str) -> PyPiResponse:
         url = f'{self._base_url}/{name}/{version}/json'

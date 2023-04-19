@@ -21,7 +21,7 @@ class TestSyncPyPiClient:
         for i, v in enumerate(versions, 1):
             print(i, v)
             versions_tuples.append(convert_version_to_tuples(v))
-        
+
         versions_tuples = sorted(versions_tuples)
 
         for i, v in enumerate(versions_tuples, 1):
