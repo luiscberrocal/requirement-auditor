@@ -32,7 +32,7 @@ def parse_requirement_file(req_file: Path, regexp: Pattern = FULLY_PINNED_REGEX)
     return parsed_requirements
 
 
-def parse_and_update(req_file, regexp: Pattern = FULLY_PINNED_REGEX) -> int:
+def parse_and_update(req_file: Path, regexp: Pattern = FULLY_PINNED_REGEX) -> int:
     parsed_lines = parse_requirement_file(req_file, regexp=regexp)
     updated = 0
 
