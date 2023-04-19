@@ -71,6 +71,11 @@ class VersionNumber(BaseModel):
     minor: int
     patch: Optional[int | str]
 
+    @staticmethod
+    def parse(version: str):
+        major, minor, patch = convert_version_to_tuples(version)
+        return VersionNumber(major=major, minor=minor, patch=patch)
+
     def __str__(self):
         if self.patch is None:
             return f'{self.major}.{self.minor}'
@@ -82,7 +87,7 @@ class VersionNumber(BaseModel):
             return convert_version_to_tuples(str(self)) >= convert_version_to_tuples(str(other))
         else:
             condition1 = (self.major, self.minor) >= (other.major, other.minor)
-            if condition1 and isinstance(other.patch, str):
+            if condition1 and isinstance(self.patch, str):
                 return True
             else:
                 return False
@@ -92,6 +97,26 @@ class VersionNumber(BaseModel):
             return convert_version_to_tuples(str(self)) > convert_version_to_tuples(str(other))
         else:
             condition1 = (self.major, self.minor) > (other.major, other.minor)
+            if condition1 and isinstance(self.patch, str):
+                return True
+            else:
+                return False
+
+    def __le__(self, other):
+        if type(other.patch) == type(self.patch):
+            return convert_version_to_tuples(str(self)) <= convert_version_to_tuples(str(other))
+        else:
+            condition1 = (self.major, self.minor) <= (other.major, other.minor)
+            if condition1 and isinstance(other.patch, str):
+                return True
+            else:
+                return False
+
+    def __lt__(self, other):
+        if type(other.patch) == type(self.patch):
+            return convert_version_to_tuples(str(self)) < convert_version_to_tuples(str(other))
+        else:
+            condition1 = (self.major, self.minor) < (other.major, other.minor)
             if condition1 and isinstance(other.patch, str):
                 return True
             else:

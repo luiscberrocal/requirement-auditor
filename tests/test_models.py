@@ -19,14 +19,21 @@ class TestVersionNumber:
         assert req2 > req1
 
     def test_greater_than2(self):
-        req1 = VersionNumber(major=2, minor=1, patch=1)
-        req2 = VersionNumber(major=3, minor=1, patch='b-0')
+        version_low = VersionNumber(major=2, minor=1, patch=1)
+        version_high = VersionNumber(major=3, minor=1, patch='b-0')
 
-        assert req2 > req1
-
+        assert version_low < version_high
+        assert version_high > version_low
 
     def test_greater_than3(self):
-        req1 = VersionNumber(major=3, minor=1, patch=1)
-        req2 = VersionNumber(major=3, minor=1, patch='b-0')
+        version_low = VersionNumber(major=3, minor=1, patch='rc1')
+        version_high = VersionNumber(major=3, minor=1, patch='rc2')
 
-        assert req1 > req2
+        assert version_high > version_low
+
+    def test_parse(self):
+        version_high = VersionNumber.parse('2.1.33')
+        version_low = VersionNumber.parse('2.1.3')
+
+        assert version_high > version_low
+        assert version_low < version_high
