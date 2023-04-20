@@ -6,6 +6,10 @@ from pydantic import BaseModel, Field, HttpUrl
 from requirement_auditor.exceptions import ParsingError
 from requirement_auditor.utils import convert_version_to_tuples
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def convert_datetime_to_iso_8601_with_z_suffix(dt: datetime) -> str:
     return dt.strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -73,7 +77,7 @@ class VersionNumber(BaseModel):
     patch: Optional[int | str]
 
     @staticmethod
-    def parse(version: str):
+    def parse(version: str, raise_on_error: bool = False) -> 'VersionNumber':
         try:
             version_tuple = convert_version_to_tuples(version)
             if len(version_tuple) == 2:
@@ -85,7 +89,9 @@ class VersionNumber(BaseModel):
             return VersionNumber(major=major, minor=minor, patch=patch)
         except ValueError as e:
             msg = f'Could not parse version {version}. Error {e}'
-            raise ParsingError(msg)
+            logger.error(msg)
+            if raise_on_error:
+                raise ParsingError(msg)
 
     def __str__(self):
         if self.patch is None:
