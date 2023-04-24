@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 import httpx
 import requests
 
 from requirement_auditor.models import VersionNumber
 from requirement_auditor.pypi.models import PyPiResponse
-from requirement_auditor.utils import convert_version_to_tuples
 
 
 class PyPiClient(ABC):
@@ -30,10 +30,17 @@ class SyncPyPiClient(PyPiClient):
             releases = results.get('releases')
             if releases is None:
                 return []
-            t_version = [VersionNumber.parse(x) for x in releases.keys()]
-            t_version = sorted(t_version)
+            t_versions = [VersionNumber.parse(x) for x in releases.keys()]
+            # t_versions: List[VersionNumber] = []
+            # for key in releases.keys():
+            #     try:
+            #         version: VersionNumber = VersionNumber.parse(key)
+            #         if version is not None:
+            #             t_versions.append(version)
 
-            return t_version
+            t_versions = sorted(t_versions)
+
+            return t_versions
 
     def get_info(self, name: str, version: str) -> PyPiResponse:
         url = f'{self._base_url}/{name}/{version}/json'

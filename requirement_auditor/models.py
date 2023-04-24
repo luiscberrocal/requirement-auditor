@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, TypeVar
 
 from pydantic import BaseModel, Field, HttpUrl
 
@@ -71,13 +71,16 @@ class ParsedLine(BaseModel):
     db_requirement: Optional[PythonRequirement] = Field(default=None)
 
 
+TVersionNumber = TypeVar("TVersionNumber", bound="VersionNumber")
+
+
 class VersionNumber(BaseModel):
     major: int
     minor: int
     patch: Optional[int | str]
 
     @staticmethod
-    def parse(version: str, raise_on_error: bool = False) -> 'VersionNumber':
+    def parse(version: str, raise_on_error: bool = False) -> TVersionNumber | None:
         try:
             version_tuple = convert_version_to_tuples(version)
             if len(version_tuple) == 2:
@@ -92,6 +95,7 @@ class VersionNumber(BaseModel):
             logger.error(msg)
             if raise_on_error:
                 raise ParsingError(msg)
+            return None
 
     def __str__(self):
         if self.patch is None:
