@@ -43,11 +43,12 @@ if __name__ == '__main__':
     # project = 'credibanco_integration'
     # project = 'movil-reseller-payments'
     # project = 'sms-integration'
-    project = 'payment_router'
+    # project = 'payment_router'
     # project = 'multipagos-integrator'
     # project ='pj_django_payments/tests/example'
     # project = 'payment-collector'
     # project = 'bcp-integration'
+    project = 'stp_payment_provider'
     command = 'CHANGE'
     if command == 'CHANGE':
         updater = Updater(db)

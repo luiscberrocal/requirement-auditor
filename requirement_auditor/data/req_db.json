@@ -21,11 +21,11 @@
     },
     "sentry-sdk": {
         "name": "sentry-sdk",
-        "latest_version": "1.23.0",
-        "approved_version": "1.23.0",
+        "latest_version": "1.24.0",
+        "approved_version": "1.24.0",
         "group": null,
         "environment": "production",
-        "last_updated": "2023-05-16 10:20:02.670884",
+        "last_updated": "2023-05-26 14:09:06.993827",
         "home_page": "https://github.com/getsentry/sentry-python",
         "license": "BSD"
     },
@@ -151,11 +151,11 @@
     },
     "coverage": {
         "name": "coverage",
-        "latest_version": "7.2.5",
-        "approved_version": "7.2.5",
+        "latest_version": "7.2.6",
+        "approved_version": "7.2.6",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-05-09 10:22:03.226488",
+        "last_updated": "2023-05-26 14:09:11.707467",
         "home_page": "https://github.com/nedbat/coveragepy",
         "license": "Apache-2.0"
     },
@@ -191,11 +191,11 @@
     },
     "pre-commit": {
         "name": "pre-commit",
-        "latest_version": "3.3.1",
-        "approved_version": "3.3.1",
+        "latest_version": "3.3.2",
+        "approved_version": "3.3.2",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-05-09 10:22:07.823216",
+        "last_updated": "2023-05-26 14:09:15.047593",
         "home_page": "https://github.com/pre-commit/pre-commit",
         "license": "MIT"
     },
@@ -451,11 +451,11 @@
     },
     "requests": {
         "name": "requests",
-        "latest_version": "2.30.0",
-        "approved_version": "2.30.0",
+        "latest_version": "2.31.0",
+        "approved_version": "2.31.0",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-05-16 10:20:43.951826",
+        "last_updated": "2023-05-26 14:09:33.606107",
         "home_page": "https://requests.readthedocs.io",
         "license": "Apache 2.0"
     },
@@ -491,11 +491,11 @@
     },
     "Faker": {
         "name": "Faker",
-        "latest_version": "18.7.0",
-        "approved_version": "18.7.0",
+        "latest_version": "18.9.0",
+        "approved_version": "18.9.0",
         "group": null,
         "environment": null,
-        "last_updated": "2023-05-09 10:23:13.482221",
+        "last_updated": "2023-05-26 14:09:39.696848",
         "home_page": "https://github.com/joke2k/faker",
         "license": "MIT License"
     },
