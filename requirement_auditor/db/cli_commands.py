@@ -40,8 +40,8 @@ def update(name: str | None = None) -> None:
             msg = f'{req.name} latest_version {req.latest_version} > {db_req.latest_version} ' \
                   f'approved: {db_req.approved_version}'
             click.secho(msg, fg='green')
-            update = click.prompt('Updated approved [y/n]?')
-            if update.upper() == 'Y':
+            should_update = click.prompt('Updated approved [y/n]?')
+            if should_update.upper() == 'Y':
                 req.approved_version = req.latest_version
                 DATABASE.update(req)  # , fields=['approved_version', 'latest_version'])
             else:

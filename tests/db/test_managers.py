@@ -1,5 +1,3 @@
-from unittest import mock
-
 from requirement_auditor.db.managers import update_single_requirement, update_requirements
 
 
@@ -29,3 +27,8 @@ def test_update_requirements(mocker, json_db):
     assert mocked_fun.call_count == 10
     assert len(updatable_requirements) == 1
     assert updatable_requirements[0].name == 'django'
+
+
+def test_print():
+    for i in range(10):
+        print('x', end='')

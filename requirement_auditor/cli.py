@@ -17,12 +17,12 @@ def main():
 
 
 @click.command()
-@click.option('-f', '--folder', type=click.Path(exists=True))
-def parse(folder: Path):
-    folder = Path(folder)
+@click.option('-d', '--directory', type=click.Path(exists=True))
+def parse(directory: Path):
+    directory = Path(directory)
     files = ['local.txt', 'base.txt', 'production.txt', 'requirements.txt', 'requirements_dev.txt']
     for file in files:
-        req_file = folder / file
+        req_file = directory / file
         if req_file.exists():
             msg = f'Processing {file}'
             click.secho(msg, fg='green')
