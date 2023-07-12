@@ -48,7 +48,10 @@ if __name__ == '__main__':
     # project ='pj_django_payments/tests/example'
     # project = 'payment-collector'
     # project = 'bcp-integration'
-    project = 'stp_payment_provider'
+    # project = 'stp_payment_provider'
+    # project = 'adelantos-mail-sender'
+    # project = 'puntopago_integration'
+    project = 'wu-integration'
     command = 'CHANGE'
     if command == 'CHANGE':
         updater = Updater(db)
