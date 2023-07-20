@@ -51,7 +51,8 @@ if __name__ == '__main__':
     # project = 'stp_payment_provider'
     # project = 'adelantos-mail-sender'
     # project = 'puntopago_integration'
-    project = 'wu-integration'
+    # project = 'wu-integration'
+    project = 'red-activa-integration'
     command = 'CHANGE'
     if command == 'CHANGE':
         updater = Updater(db)

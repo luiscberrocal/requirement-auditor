@@ -21,11 +21,11 @@
     },
     "sentry-sdk": {
         "name": "sentry-sdk",
-        "latest_version": "1.28.0",
-        "approved_version": "1.28.0",
+        "latest_version": "1.28.1",
+        "approved_version": "1.28.1",
         "group": null,
         "environment": "production",
-        "last_updated": "2023-07-12 11:03:03.083247",
+        "last_updated": "2023-07-14 10:47:48.742007",
         "home_page": "https://github.com/getsentry/sentry-python",
         "license": "BSD"
     },
@@ -281,11 +281,11 @@
     },
     "Pillow": {
         "name": "Pillow",
-        "latest_version": "9.5.0",
-        "approved_version": "9.5.0",
+        "latest_version": "10.0.0",
+        "approved_version": "10.0.0",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-04-10 10:53:48.758620",
+        "last_updated": "2023-07-14 10:47:56.276724",
         "home_page": "https://github.com/python-pillow/Pillow",
         "license": "HPND"
     },
