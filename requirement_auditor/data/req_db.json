@@ -1,11 +1,11 @@
 {
     "gunicorn": {
         "name": "gunicorn",
-        "latest_version": "20.1.0",
-        "approved_version": "20.1.0",
+        "latest_version": "21.2.0",
+        "approved_version": "21.2.0",
         "group": null,
         "environment": "production",
-        "last_updated": "2022-12-29 10:05:21.952448",
+        "last_updated": "2023-07-20 10:26:37.030663",
         "home_page": "https://github.com/benoitc/gunicorn",
         "license": "MIT"
     },
@@ -201,11 +201,11 @@
     },
     "factory-boy": {
         "name": "factory-boy",
-        "latest_version": "3.2.1",
-        "approved_version": "3.2.1",
+        "latest_version": "3.3.0",
+        "approved_version": "3.3.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2022-12-29 10:05:28.633584",
+        "last_updated": "2023-07-20 10:26:42.633057",
         "home_page": "https://github.com/FactoryBoy/factory_boy",
         "license": "MIT"
     },
@@ -511,11 +511,11 @@
     },
     "pip": {
         "name": "pip",
-        "latest_version": "23.1.2",
-        "approved_version": "23.1.2",
+        "latest_version": "23.2",
+        "approved_version": "23.2",
         "group": null,
         "environment": null,
-        "last_updated": "2023-05-09 10:23:23.458847",
+        "last_updated": "2023-07-20 10:26:49.663005",
         "home_page": "https://pip.pypa.io/",
         "license": "MIT"
     },

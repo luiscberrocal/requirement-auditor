@@ -12,6 +12,7 @@ requirement-auditor database add --name django
 """
 
 import logging
+from pathlib import Path
 
 import click
 
@@ -78,5 +79,20 @@ def add(name: str):
         DATABASE.save()
 
 
+@click.command(help='Database update database')
+@click.option('project_folder', '-d', '--directory', type=click.Path(exists=True))
+@click.option('-n', '--name')
+def upgrade(project_folder: Path, name: str):
+    project_folder = Path(project_folder)
+    matching_folders = []
+    for folder in project_folder.iterdir():
+        if name in folder.name:
+            matching_folders.append(folder)
+    for i, folder in enumerate(matching_folders):
+        click.secho(f'[{i}] {folder.name}', fg='green')
+
+
+
+database.add_command(upgrade)
 database.add_command(update)
 database.add_command(add)
