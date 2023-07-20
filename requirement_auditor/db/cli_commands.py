@@ -21,6 +21,7 @@ from requirement_auditor.db.managers import update_single_requirement, update_re
 from requirement_auditor.handlers import get_latest_version, handle_pypi_info
 from requirement_auditor.models import PythonRequirement
 from requirement_auditor.pypi.models import PyPiResponse
+from requirement_auditor.reqs_utilities.updaters import Updater
 
 logger = logging.getLogger(__name__)
 
@@ -90,7 +91,17 @@ def upgrade(project_folder: Path, name: str):
             matching_folders.append(folder)
     for i, folder in enumerate(matching_folders):
         click.secho(f'[{i}] {folder.name}', fg='green')
-
+    index = click.prompt(f'Select folder', type=int)
+    folder_to_update = matching_folders[index]
+    print(f'{folder_to_update=}')
+    updater = Updater(DATABASE)
+    files = ['local.txt', 'base.txt', 'production.txt', 'staging.txt']
+    for file in files:
+        f = folder_to_update / f'requirements/{file}'
+        print(f'{f=}')
+        if f.exists():
+            updater.update_requirements(f)
+            click.secho(f'Upgraded f{f}')
 
 
 database.add_command(upgrade)
