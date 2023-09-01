@@ -76,7 +76,8 @@ def main2(requirements_folder: Path, folder: Path):
 if __name__ == '__main__':
     home = Path().home()
     # db_file = home / 'PycharmProjects/django_scaffolding_tools/tests/fixtures/_experimental/req_db.json'
-    db_file = Path(__file__).parent / 'req_db.json'
+    db_file = Path(__file__).parent.parent / 'data' / 'req_db.json'
+    # db_file = Path(__file__).parent / 'req_db.json'
     if not db_file.exists():
         raise Exception('File not found')
     db = JSONReqDatabase(db_file)

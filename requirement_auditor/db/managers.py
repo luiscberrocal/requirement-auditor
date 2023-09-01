@@ -35,7 +35,7 @@ def update_single_requirement(requirement: PythonRequirement,
             new_requirement.latest_version = version
             updated = True
     except TypeError as e:
-        error_message = f'{e}. Version {version_tuple} lastest {requirement.latest_version}'
+        error_message = f'{e}. Version {version_tuple} latest {requirement.latest_version}'
         logger.error(error_message)
     if fields is not None:
         raise RequirementAuditorException('Not implemented')
