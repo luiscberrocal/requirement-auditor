@@ -94,4 +94,5 @@ if __name__ == '__main__':
     files = ['local.txt', 'base.txt', 'production.txt', 'staging.txt']
     for file in files:
         f = home / f'adelantos/{project}/requirements/{file}'
+        print(f'Processing {f}')
         interactive_parse_requirements(f, db)
