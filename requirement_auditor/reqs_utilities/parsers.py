@@ -76,7 +76,8 @@ def main2(requirements_folder: Path, folder: Path):
 if __name__ == '__main__':
     home = Path().home()
     # db_file = home / 'PycharmProjects/django_scaffolding_tools/tests/fixtures/_experimental/req_db.json'
-    db_file = Path(__file__).parent / 'req_db.json'
+    db_file = Path(__file__).parent.parent / 'data' / 'req_db.json'
+    # db_file = Path(__file__).parent / 'req_db.json'
     if not db_file.exists():
         raise Exception('File not found')
     db = JSONReqDatabase(db_file)
@@ -88,8 +89,10 @@ if __name__ == '__main__':
     # project = 'movil-reseller-payments'
     # project = 'sms-integration'
     # project = 'payment_router'
+    project = 'wom_payment_provider'
     command = 'UPDATE'
-    files = ['local.txt', 'base.txt', 'production.txt']
+    files = ['local.txt', 'base.txt', 'production.txt', 'staging.txt']
     for file in files:
         f = home / f'adelantos/{project}/requirements/{file}'
+        print(f'Processing {f}')
         interactive_parse_requirements(f, db)

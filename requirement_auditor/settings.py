@@ -8,10 +8,11 @@ FULLY_PINNED_REGEX = re.compile(r"^(?P<name>[\w_\-]+)==(?P<version>[\w.\-]+)\s*(
 
 try:
     CONFIGURATION = CONFIGURATION_MANAGER.get_configuration()
-    LOG_FOLDER = CONFIGURATION['logs']['directory']
+    LOG_FOLDER = CONFIGURATION['logs']['folder']
     LOG_FILE = Path(f'{LOG_FOLDER}/{CONFIGURATION["logs"]["filename"]}')
-except KeyError:
-    error_message = 'Error getting logs configuration. Check the configuration file.'
+except KeyError as e:
+    error_message = f'Error getting logs configuration. Check the configuration file ' \
+                    f'{CONFIGURATION_MANAGER.config_file}. Error {e}'
     LOG_FILE = CONFIGURATION_MANAGER.logs_folder / f'{CONFIGURATION_MANAGER.APP_NAME}.log'
     print(error_message)
 
