@@ -88,8 +88,9 @@ if __name__ == '__main__':
     # project = 'movil-reseller-payments'
     # project = 'sms-integration'
     # project = 'payment_router'
+    project = 'wom_payment_provider'
     command = 'UPDATE'
-    files = ['local.txt', 'base.txt', 'production.txt']
+    files = ['local.txt', 'base.txt', 'production.txt', 'staging.txt']
     for file in files:
         f = home / f'adelantos/{project}/requirements/{file}'
         interactive_parse_requirements(f, db)
