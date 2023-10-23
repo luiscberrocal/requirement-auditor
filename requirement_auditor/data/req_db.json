@@ -81,11 +81,11 @@
     },
     "pytest": {
         "name": "pytest",
-        "latest_version": "7.4.0",
-        "approved_version": "7.4.0",
+        "latest_version": "7.4.1",
+        "approved_version": "7.4.1",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-07-12 11:03:15.103537",
+        "last_updated": "2023-09-04 14:21:29.806587",
         "home_page": "https://github.com/pytest-dev/pytest",
         "license": "MIT"
     },
@@ -191,11 +191,11 @@
     },
     "pre-commit": {
         "name": "pre-commit",
-        "latest_version": "3.3.3",
-        "approved_version": "3.3.3",
+        "latest_version": "3.4.0",
+        "approved_version": "3.4.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2023-07-12 11:03:29.985868",
+        "last_updated": "2023-09-04 14:21:49.631310",
         "home_page": "https://github.com/pre-commit/pre-commit",
         "license": "MIT"
     },
@@ -251,11 +251,11 @@
     },
     "django-test-tools": {
         "name": "django-test-tools",
-        "latest_version": "2.1.0",
-        "approved_version": "2.1.0",
+        "latest_version": "2.2.0",
+        "approved_version": "2.2.0",
         "group": null,
         "environment": "local",
-        "last_updated": "2022-12-29 10:05:30.289592",
+        "last_updated": "2023-09-04 14:22:03.887980",
         "home_page": "https://github.com/luiscberrocal/django-test-tools",
         "license": "MIT"
     },
@@ -331,11 +331,11 @@
     },
     "celery": {
         "name": "celery",
-        "latest_version": "5.3.0b1",
-        "approved_version": "5.2.7",
+        "latest_version": "5.3.4",
+        "approved_version": "5.3.4",
         "group": null,
         "environment": "base",
-        "last_updated": "2022-12-29 10:05:32.917688",
+        "last_updated": "2023-09-04 14:22:25.722427",
         "home_page": "http://celeryproject.org",
         "license": "BSD"
     },
@@ -351,21 +351,21 @@
     },
     "django": {
         "name": "django",
-        "latest_version": "4.2.4",
-        "approved_version": "4.2.4",
+        "latest_version": "4.2.5",
+        "approved_version": "4.2.5",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-09-01 09:33:15.178759",
+        "last_updated": "2023-09-04 14:22:35.042601",
         "home_page": "https://www.djangoproject.com/",
         "license": "BSD-3-Clause"
     },
     "django-environ": {
         "name": "django-environ",
-        "latest_version": "0.11.1",
-        "approved_version": "0.11.1",
+        "latest_version": "0.11.2",
+        "approved_version": "0.11.2",
         "group": null,
         "environment": "base",
-        "last_updated": "2023-09-01 09:33:20.867033",
+        "last_updated": "2023-09-04 14:22:40.353879",
         "home_page": "https://django-environ.readthedocs.org",
         "license": "MIT"
     },
@@ -501,11 +501,11 @@
     },
     "tox": {
         "name": "tox",
-        "latest_version": "4.11.0",
-        "approved_version": "4.11.0",
+        "latest_version": "4.11.1",
+        "approved_version": "4.11.1",
         "group": null,
         "environment": null,
-        "last_updated": "2023-09-01 09:34:03.122808",
+        "last_updated": "2023-09-04 14:22:59.953200",
         "home_page": null,
         "license": null
     },
